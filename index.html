@@ -1,0 +1,1904 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
+
+<!-- META: applySite() дублирует эти теги в рантайме, НО соцскрейперы (VK/TG/WA/FB) JS не исполняют.
+     ПЕРЕД ДЕПЛОЕМ вписать сюда реальные title/description/og/twitter + абсолютные URL (см. SKELETON-README §9). -->
+<title>Минус стресс — массажный салон в центре Новосибирска</title>
+<meta name="description" content="Массажный салон «Минус стресс» в центре Новосибирска: оздоровительный и аппаратный массаж, массаж лица, спа-программы. 4,9 в 2ГИС по 408 оценкам. Запись — +7 999 305-98-95.">
+<link rel="canonical" href="https://nikita41478.github.io/NoStress/">
+<meta property="og:title" content="Минус стресс — массажный салон в центре Новосибирска">
+<meta property="og:description" content="Оздоровительный и аппаратный массаж, массаж лица, спа. В центре, на Ленина, 12. Рейтинг 4,9 в 2ГИС по 408 оценкам.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Минус стресс">
+<meta property="og:url" content="https://nikita41478.github.io/NoStress/">
+<meta property="og:image" content="https://nikita41478.github.io/NoStress/images/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Минус стресс — массажный салон в центре Новосибирска">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Минус стресс — массажный салон в центре Новосибирска">
+<meta name="twitter:description" content="Оздоровительный и аппаратный массаж, массаж лица, спа. Рейтинг 4,9 в 2ГИС.">
+<meta name="twitter:image" content="https://nikita41478.github.io/NoStress/images/og.jpg">
+
+<!-- ============================================================================
+     ЗОНА A — СКИН  (заменить целиком блоком направления из CLAUDE.md §8)
+     Это всё, что отвечает за «облик»: токены :root, Google Fonts <link>,
+     font-family заголовков/текста, theme-color. Дефолт ниже — НЕЙТРАЛЬНЫЙ
+     placeholder-скин (намеренно «никакой»), чтобы было видно: скин не выбран.
+     ============================================================================ -->
+<meta name="theme-color" content="#F2F1E6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500;1,600&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* --- СКИН: §8.4 Органик / ботаника (шалфей на тёплом овсяном). Акцент держим зелёным. --- */
+  --bg:#F2F1E6; --bg-2:#E6E5D4; --bg-scrolled:rgba(242,241,230,.93);
+  --ink:#2C3024; --ink-soft:#5E6450;
+  --accent:#6E7B4E; --accent-deep:#54603A; --accent-soft:#DCDFC7;
+  --clay:#B07A52;         /* вторичный — глина, ТОЛЬКО мелкие детали (Зона A2) */
+  --line:rgba(44,48,36,.16);
+  --ph-bg:#E6E5D4;        /* фон-заглушка под фото (пока картинка не загрузилась/нет) */
+  --btn-ink:#F6F5EC;      /* тёплый кремовый текст на заполненной (filled) кнопке */
+  --lb-bg:rgba(28,31,22,.93);
+  /* --- шрифты скина --- */
+  --font-head:'Spectral', Georgia, 'Times New Roman', serif;
+  --font-body:'Golos Text', 'Segoe UI', system-ui, Arial, sans-serif;
+  /* облик заголовков (гуманистический serif — обычный регистр, вес 500) */
+  --font-head-weight:500;   /* вес h1/h2/h3 */
+  --head-transform:none;    /* none | uppercase; действует ТОЛЬКО на дисплейные (h1, h2.title) */
+  --head-tracking:.2px;     /* трекинг заголовков */
+  /* радиусы — мягкие, органичные (§8.4: sm10 · md16 · lg24 · кнопки-пилюли) */
+  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-btn:999px;
+  /* тень CTA — тёплая, мягкая (шалфей), без глянца */
+  --shadow-cta:0 14px 34px -14px color-mix(in srgb, var(--accent) 48%, transparent);
+  --shadow-cta-hover:0 18px 42px -12px color-mix(in srgb, var(--accent) 62%, transparent);
+/* ============================================================================
+     НИЖЕ — ЗОНА C (СКЕЛЕТ-замок): структура, не трогать под проект.
+     ============================================================================ */
+  --shadow:0 18px 50px -20px rgba(0,0,0,.28);
+  --shadow-soft:0 10px 30px -16px rgba(0,0,0,.18);
+  --maxw:1140px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+
+  /* --- ШКАЛА СПЕЙСИНГА (база 4px; имя = px/4). Один шаг на весь сайт. ---
+     Правило «внутреннее < внешнее»: внутри группы — меньший токен, между группами —
+     больший, между секциями — самый большой. Не вводить значений вне шкалы. */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+  --space-6:24px; --space-8:32px; --space-12:48px; --space-16:64px;
+  --space-24:96px; --space-32:128px;
+
+  /* --- ТИПОШКАЛА (9 ступеней). Размеры структурны → живут здесь (Зона C), едины для всех
+     ниш. В скине (Зона A) меняется только семейство шрифта (--font-head/--font-body).
+     2xs..2xl — фикс-ступени UI/текста; 3xl/hero — якорные дисплейные, fluid через clamp. */
+  --text-2xs:12px; --text-xs:14px; --text-sm:16px; --text-md:18px;
+  --text-lg:20px; --text-xl:24px; --text-2xl:30px;
+  --text-3xl:clamp(28px,5.4vw,46px);   /* заголовки секций (h2.title) */
+  --text-hero:clamp(38px,6.2vw,62px);  /* hero h1 */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:74px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* reset (баг-фиксы скелета) */
+figure,blockquote{margin:0}
+button{padding:0}
+img{display:block; max-width:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:400; line-height:1.6; letter-spacing:.1px;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+h1,h2,h3,.serif{font-family:var(--font-head); font-weight:var(--font-head-weight); letter-spacing:var(--head-tracking)}
+h1,h2.title{text-transform:var(--head-transform)}
+a{color:inherit; text-decoration:none}
+[hidden]{display:none !important}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+section{padding:var(--space-24) 0; position:relative}
+@media (max-width:640px){section{padding:var(--space-12) 0}}
+
+/* labels / headings */
+.eyebrow{
+  font-size:var(--text-2xs); letter-spacing:.32em; text-transform:uppercase;
+  color:var(--accent-deep); font-weight:500; display:flex; align-items:center; gap:var(--space-3); margin:0 0 var(--space-3);
+}
+h2.title{font-size:var(--text-3xl); line-height:1.08; margin:0 0 var(--space-4)}
+.lead{color:var(--ink-soft); max-width:60ch; font-size:var(--text-md)}
+
+/* buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
+  font-family:inherit; font-size:var(--text-sm); font-weight:500; letter-spacing:.03em;
+  padding:14px 26px; border-radius:var(--r-btn); cursor:pointer; border:1px solid transparent;  /* padding off-scale: тач-таргет ≥44px + замер ширины шапки */
+  transition:transform .12s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease), border-color .25s;
+  text-align:center;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(180deg,var(--accent),var(--accent-deep)); color:var(--btn-ink); font-weight:600; box-shadow:var(--shadow-cta)}
+.btn-primary:hover{box-shadow:var(--shadow-cta-hover)}
+.btn-ghost{background:transparent; border-color:var(--line); color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent); background:var(--accent-soft)}
+.btn-block{width:100%}
+.btn-sm{padding:11px 18px; font-size:var(--text-xs)}  /* padding off-scale: тач-таргет */
+/* ведущая иконка в кнопке (из набора ICONS); цвет наследует текст кнопки */
+.btn svg{width:17px; height:17px; flex:none; stroke:currentColor; fill:none}
+.btn svg.brand{fill:currentColor; stroke:none}
+.btn-sm svg{width:15px; height:15px}
+
+/* ============ HEADER ============ */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:40;
+  padding:var(--space-3) 0; transition:background .3s var(--ease), padding .3s var(--ease);
+}
+/* NB: на .topbar НЕ ставить backdrop-filter/filter/transform/perspective: отфильтрованный
+   предок становится containing block для fixed-оверлея бургер-меню и схлопывает его в
+   коробку шапки. Используем непрозрачный фон. */
+.topbar.scrolled{background:var(--bg-scrolled); border-bottom:1px solid var(--line); padding:var(--space-2) 0}
+.topbar-inner{
+  max-width:var(--maxw); margin:0 auto; padding:0 20px; width:100%;
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-4);
+}
+.brand{font-family:var(--font-head); font-size:var(--text-xl); letter-spacing:1px; display:flex; align-items:center; gap:var(--space-4); flex:none; z-index:60}
+.brand b{color:inherit; font-weight:400}
+.foot-logo{height:34px; width:34px; flex:none; border-radius:50%; object-fit:cover; box-shadow:0 0 0 1px var(--line), var(--shadow-soft); background:var(--ph-bg)}
+.brand-logo{height:44px; width:44px; flex:none; border-radius:50%; object-fit:cover; background:var(--ph-bg);
+  box-shadow:0 0 0 1px var(--line), var(--shadow-soft); transition:height .3s var(--ease), width .3s var(--ease)}
+.topbar.scrolled .brand-logo{height:38px; width:38px}
+/* «Бренд» в один flex-айтем (.brand-name), иначе gap встаёт и между словами */
+.brand-name{white-space:nowrap}
+
+/* nav */
+.nav{display:flex; align-items:center; gap:var(--space-6)}
+.nav-link{font-size:var(--text-xs); color:var(--ink); letter-spacing:.01em; position:relative; transition:color .2s var(--ease)}
+.nav-link:hover{color:var(--accent-deep)}
+.nav-link::after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:1px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .25s var(--ease)}
+.nav-link:hover::after{transform:scaleX(1)}
+.nav .tel{display:inline-flex; align-items:center; gap:var(--space-2); font-size:var(--text-xs); color:var(--ink); white-space:nowrap}
+.nav .tel:hover{color:var(--accent-deep)}
+.nav-cta{white-space:nowrap}
+
+/* burger */
+.burger{display:none; width:44px; height:44px; flex:none; border:1px solid var(--line); border-radius:var(--r-btn);
+  background:transparent; position:relative; cursor:pointer; z-index:60; transform:translateZ(0); transition:border-color .2s, background .2s}
+.burger:hover{border-color:var(--accent); background:var(--accent-soft)}
+/* три штриха равной толщины: ЦЕЛЫЙ шаг между линиями = 8px (не 7), чтобы шаг*DPR был
+   целым на дробных Windows-масштабах (1.25/1.5/1.75) и фазы линий совпадали */
+.burger span,.burger span::before,.burger span::after{position:absolute; left:11px; right:11px; height:2px; background:var(--accent); border-radius:2px; transition:transform .3s var(--ease), opacity .2s var(--ease), top .3s var(--ease)}
+.burger span{top:20px}
+.burger span::before,.burger span::after{content:""; left:0; right:0}
+.burger span::before{top:-8px}
+.burger span::after{top:8px}
+.burger.open span{background:transparent}
+.burger.open span::before{top:0; transform:rotate(45deg)}
+.burger.open span::after{top:0; transform:rotate(-45deg)}
+
+/* Компактный режим (бургер) включается JS-ом по ФАКТУ нехватки места, а не по фикс-
+   брейкпоинту (см. updateNav): длинный логотип/много пунктов → бургер раньше, короткий →
+   позже. Класс .compact ставится на .topbar. (Контент сайта рендерит JS, поэтому отдельный
+   no-JS фоллбэк не нужен.) */
+.topbar.compact .burger{display:block}
+.topbar.compact .nav{
+  position:fixed; inset:0; z-index:55; flex-direction:column; justify-content:center; gap:var(--space-2);
+  padding:var(--space-24) var(--space-6) var(--space-12); background:var(--bg);
+  opacity:0; visibility:hidden;
+  transition:opacity .25s var(--ease), visibility 0s linear .25s;
+}
+.topbar.compact .nav.open{opacity:1; visibility:visible; transition:opacity .25s var(--ease), visibility 0s}
+.topbar.nav-measuring .nav{transition:none !important}
+.topbar.compact .nav-link{font-family:var(--font-head); font-size:var(--text-xl); color:var(--ink); padding:var(--space-2) 0}
+.topbar.compact .nav-link::after{display:none}
+.topbar.compact .nav .tel{font-size:var(--text-lg); margin-top:var(--space-4)}
+.topbar.compact .nav-cta{margin-top:var(--space-2); padding:14px 34px; font-size:var(--text-sm)}  /* padding off-scale: тач-таргет */
+.topbar.compact .nav.open>*{animation:navItem .45s var(--ease) both}
+.topbar.compact .nav.open>*:nth-child(1){animation-delay:.08s}
+.topbar.compact .nav.open>*:nth-child(2){animation-delay:.13s}
+.topbar.compact .nav.open>*:nth-child(3){animation-delay:.18s}
+.topbar.compact .nav.open>*:nth-child(4){animation-delay:.23s}
+.topbar.compact .nav.open>*:nth-child(5){animation-delay:.28s}
+.topbar.compact .nav.open>*:nth-child(6){animation-delay:.33s}
+.topbar.compact .nav.open>*:nth-child(7){animation-delay:.38s}
+.topbar.compact .nav.open>*:nth-child(8){animation-delay:.43s}
+@keyframes navItem{from{opacity:0; transform:translateY(18px)}to{opacity:1; transform:none}}
+
+/* ============ HERO — универсальный сплит (текст НЕ поверх фото) ============ */
+/* hero сам управляет вертикальными отступами через .hero-inner — гасим общий section{padding} (иначе двойной отступ сверху и hero «сползает» вниз) */
+/* НЕ overflow:hidden в обычном сплите — иначе обрезается мягкая тень фото снизу (тень тянется ниже паддинга). overflow нужен только overlay-режиму (фон-фото на всю ширину). */
+.hero{position:relative; background:var(--bg); padding:0}
+.hero-inner{max-width:var(--maxw); margin:0 auto;
+  padding:var(--space-24) 20px var(--space-8); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-12); align-items:center}
+@media (max-width:899px){.hero-inner{grid-template-columns:minmax(0,1fr); padding:var(--space-24) 20px var(--space-12); gap:var(--space-12)}}
+.hero-copy{max-width:560px}
+.hero h1{font-size:var(--text-hero); line-height:1.05; margin:0 0 var(--space-4); letter-spacing:.4px}
+.hero h1 em{color:var(--accent); font-style:normal}
+.hero .offer{font-family:var(--font-head); font-size:clamp(18px,2.4vw,24px); line-height:1.34; color:var(--ink-soft); max-width:32ch; margin:0 0 var(--space-8)}
+.hero .offer em{color:var(--accent); font-style:normal}
+.hero-cta{display:flex; flex-wrap:wrap; gap:var(--space-3)}
+.hero-media{position:relative}
+#heroPhoto{width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:var(--r-lg); border:1px solid var(--line); box-shadow:var(--shadow); background:var(--ph-bg)}
+.hero-badge{position:absolute; left:var(--space-4); bottom:var(--space-4); display:inline-flex; align-items:center; gap:var(--space-2);
+  background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-md); padding:var(--space-2) var(--space-3); box-shadow:var(--shadow-soft)}
+.hero-badge .st{color:var(--accent); font-size:var(--text-md); line-height:1}
+.hero-badge .val{font-family:var(--font-head); font-size:var(--text-xl); line-height:1}
+.hero-badge .meta{font-size:var(--text-2xs); color:var(--ink-soft); max-width:14ch; line-height:1.2}
+/* нет фото → медиа-колонка схлопывается, hero становится текстовым */
+.hero.no-photo .hero-inner{grid-template-columns:minmax(0,1fr)}
+.hero.no-photo .hero-media{display:none}
+/* HERO_OVERLAY=true (опц.): фото фоном + затемнение + текст поверх */
+.hero.hero-overlay{overflow:hidden}   /* фон-фото на всю ширину клипуем по hero */
+.hero.hero-overlay .hero-inner{grid-template-columns:minmax(0,1fr); min-height:88vh; align-items:center}
+.hero.hero-overlay .hero-media{position:absolute; inset:0; z-index:0; margin:0}
+.hero.hero-overlay #heroPhoto{width:100%; height:100%; aspect-ratio:auto; border:0; border-radius:0; box-shadow:none}
+.hero.hero-overlay .hero-media::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.32) 60%, transparent)}
+.hero.hero-overlay .hero-copy{position:relative; z-index:2; color:#fff}
+.hero.hero-overlay .hero-copy .offer{color:rgba(255,255,255,.86)}
+.hero.hero-overlay .hero-badge{position:relative; left:0; bottom:0; margin-top:var(--space-6)}
+
+/* ============ TRUST STRIP (опц., из TRUST) ============ */
+/* полоса доверия прижата к hero (не полный меж-секционный зазор): верхний паддинг мал */
+#trust{padding-top:var(--space-4)}
+.trust{display:grid; gap:var(--space-4) var(--space-6); grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px){.trust{grid-template-columns:repeat(var(--trust-n,3),minmax(0,1fr))}}
+.trust-item{display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-2)}
+.trust-ic{width:42px; height:42px; border:1px solid var(--line); border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; color:var(--accent)}
+.trust-ic svg{width:21px; height:21px; stroke:currentColor; fill:none}
+.trust-big{font-family:var(--font-head); font-size:var(--text-xl); line-height:1.05}
+.trust-small{color:var(--ink-soft); font-size:var(--text-xs)}
+
+/* ============ SERVICES ============ */
+.svc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:var(--space-4); margin-top:var(--space-8)}
+/* grouped-режим (SERVICE_GROUPS): шире — 2 колонки на десктопе, 1 на мобайле */
+.svc-grid.grouped{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:760px){ .svc-grid.grouped{grid-template-columns:minmax(0,1fr)} }
+.svc{
+  background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg);
+  overflow:hidden; display:flex; flex-direction:column;
+  transition:transform .3s var(--ease), border-color .3s, box-shadow .3s;
+}
+.svc:hover{transform:translateY(-4px); border-color:var(--accent); box-shadow:var(--shadow-soft)}
+.svc-ph{aspect-ratio:16/10; overflow:hidden; position:relative; background:var(--ph-bg)}
+.svc-ph img{width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease)}
+.svc:hover .svc-ph img{transform:scale(1.06)}
+.svc-body{padding:var(--space-4); display:flex; flex-direction:column; gap:var(--space-3); flex:1}
+/* текстовая карточка (нет img) — осознанная заглушка, чуть больше воздуха сверху */
+.svc.no-photo .svc-body{padding-top:var(--space-6)}
+.svc-name{font-family:var(--font-head); font-size:var(--text-lg); line-height:1.15}
+/* desc чуть ближе к имени (компенсируем body gap), низ до цены не трогаем */
+.svc-desc{font-size:var(--text-xs); line-height:1.55; color:var(--ink-soft); margin-top:-4px}
+/* meta-строка: крупная цена слева + длительность справа, прижата к низу карточки */
+.svc-meta{display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-3); margin-top:auto}
+.svc-price{font-family:var(--font-head); font-size:var(--text-2xl); color:var(--accent); letter-spacing:.5px; white-space:nowrap}
+/* рубль всегда мельче самой цены — цена перетягивает внимание */
+.rub{font-size:.62em; font-weight:400; color:var(--accent-deep)}
+.svc-dur{font-size:var(--text-2xs); color:var(--ink-soft); display:inline-flex; align-items:center; gap:var(--space-2)}
+.svc-dur svg{stroke:var(--ink-soft); fill:none}
+/* grouped: карточка-категория с прайс-строками */
+.svc-group{
+  background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg);
+  padding:var(--space-8) var(--space-6) var(--space-6); display:flex; flex-direction:column; gap:var(--space-3);
+  transition:transform .3s var(--ease), border-color .3s, box-shadow .3s;
+}
+.svc-group:hover{transform:translateY(-4px); border-color:var(--accent); box-shadow:var(--shadow-soft)}
+.svc-group-head{display:flex; align-items:center; gap:var(--space-3)}
+.svc-group-ic{flex:none; display:inline-flex}
+.svc-group-ic svg{width:24px; height:24px; stroke:var(--accent); fill:none}
+/* margin:0 — гасим дефолтные UA-отступы h3 (24px сверху/снизу), иначе заголовок «висит» далеко от строк */
+.svc-group-title{font-family:var(--font-head); font-size:var(--text-xl); line-height:1.1; margin:0}
+.svc-rows{display:flex; flex-direction:column}
+.svc-row{display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-3); padding:var(--space-3) 0}
+/* первая/последняя строка без внешнего padding — он нужен только для ритма разделителей между строками */
+.svc-rows .svc-row:first-child{padding-top:0}
+.svc-rows .svc-row:last-child{padding-bottom:0}
+.svc-row + .svc-row{border-top:1px solid var(--line)}
+.svc-row-name{font-size:var(--text-sm); line-height:1.3}
+.svc-row-note{display:block; font-size:var(--text-2xs); color:var(--ink-soft); margin-top:var(--space-1)}
+.svc-row-price{font-family:var(--font-head); font-size:var(--text-lg); color:var(--accent-deep); white-space:nowrap}
+.svc-group-desc{font-size:var(--text-xs); line-height:1.55; color:var(--ink-soft)}
+/* отрыв кнопки от последней услуги: gap(12) + 16 = ~28px, чтобы кнопка читалась как общая, не «при услуге» */
+.svc-group > :nth-last-child(2){margin-bottom:var(--space-4)}
+.svc-group .btn{margin-top:auto}
+
+/* ============ GALLERY ============ */
+.tabs{display:flex; flex-wrap:wrap; gap:var(--space-2); margin:var(--space-6) 0}
+.tab{
+  font-family:inherit; font-size:var(--text-xs); letter-spacing:.04em; color:var(--ink-soft);
+  background:transparent; border:1px solid var(--line); border-radius:var(--r-btn);
+  padding:var(--space-2) var(--space-4); cursor:pointer; transition:all .2s var(--ease);
+}
+.tab:hover{color:var(--ink); border-color:var(--accent)}
+.tab.active{background:var(--accent-soft); border-color:var(--accent); color:var(--accent-deep)}
+.gal{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:var(--space-2)}
+@media (min-width:760px){.gal{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}
+.gal-item{
+  position:relative; aspect-ratio:1; overflow:hidden; border-radius:var(--r-md);
+  cursor:pointer; border:1px solid transparent; background:var(--ph-bg); padding:0;
+  transition:border-color .25s, transform .25s var(--ease);
+}
+.gal-item img{display:block; width:100%; height:100%; object-fit:cover; transition:transform .55s var(--ease), opacity .3s}
+.gal-item::after{content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(0deg,var(--accent-soft),transparent 60%); opacity:0; transition:opacity .25s}
+.gal-item:hover{border-color:var(--accent)}
+.gal-item:hover img{transform:scale(1.07)}
+.gal-item:hover::after{opacity:1}
+.gal-item .zoom{position:absolute; z-index:2; right:var(--space-2); bottom:var(--space-2); width:30px; height:30px; border-radius:var(--r-sm);
+  background:var(--bg-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; opacity:0; transform:translateY(6px); transition:.25s var(--ease)}
+.gal-item:hover .zoom{opacity:1; transform:none}
+.gal-item .zoom svg{width:15px; height:15px; stroke:var(--accent); fill:none}
+/* визуальная доминанта: первое фото крупнее (место 4-х плиток) */
+.gal-item.feature{grid-column:span 2; grid-row:span 2}
+.gal-item.gal-hidden{display:none}
+.gal-more-wrap{display:flex; justify-content:center; margin-top:var(--space-6)}
+
+/* ============ ABOUT / MASTERS ============ */
+.about-grid{display:grid; gap:var(--space-8); grid-template-columns:minmax(0,1fr); align-items:center}
+@media (min-width:880px){.about-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:var(--space-12)}}
+.about-grid.no-photo{grid-template-columns:minmax(0,1fr)}
+.about-grid.no-photo .about-photo{display:none}
+.about-points{list-style:none; padding:0; margin:var(--space-6) 0 0; display:grid; gap:var(--space-4)}
+.about-points li{display:flex; gap:var(--space-3)}
+.about-points .ic{flex:none; width:38px; height:38px; border:1px solid var(--line); border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; color:var(--accent)}
+.about-points .ic svg{width:19px; height:19px; stroke:currentColor; fill:none}
+.about-points h3{margin:0 0 var(--space-1); font-family:var(--font-head); font-weight:var(--font-head-weight); font-size:var(--text-md)}
+.about-points p{margin:0; color:var(--ink-soft); font-size:var(--text-xs)}
+.about-photo{border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--line); aspect-ratio:4/5; box-shadow:var(--shadow); background:var(--ph-bg)}
+.about-photo img{width:100%; height:100%; object-fit:cover}
+
+/* «Команда» теперь отдельная секция (#team) — вертикальный ритм даёт section{padding}, свой margin не нужен */
+.masters{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:var(--space-4); margin-top:var(--space-8)}
+.master{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; transition:transform .3s var(--ease), border-color .3s, box-shadow .3s}
+.master:hover{transform:translateY(-4px); border-color:var(--accent); box-shadow:var(--shadow-soft)}
+.master-ph{aspect-ratio:4/5; overflow:hidden; background:var(--ph-bg)}
+.master-ph img{width:100%; height:100%; object-fit:cover; object-position:center top; transition:transform .5s var(--ease)}
+.master:hover .master-ph img{transform:scale(1.05)}
+.master-body{padding:var(--space-4); flex:1; display:flex; flex-direction:column}
+.master-body h3{margin:0 0 var(--space-2); font-family:var(--font-head); font-weight:var(--font-head-weight); font-size:var(--text-xl)}
+.master-body p{margin:0 0 var(--space-3); color:var(--ink-soft); font-size:var(--text-xs)}
+.master-body .btn{margin-top:auto}
+
+/* ============ REVIEWS ============ */
+.rev-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:var(--space-4); margin-top:var(--space-8)}
+.rev{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--space-6); display:flex; flex-direction:column}
+.rev .stars{color:var(--accent); letter-spacing:3px; font-size:var(--text-xs); margin-bottom:var(--space-3)}
+.rev p{margin:0 0 var(--space-4); font-size:var(--text-xs); color:var(--ink)}
+.rev .who{margin-top:auto; display:flex; align-items:center; gap:var(--space-3)}
+.rev .ava{width:40px; height:40px; border-radius:50%; background:var(--accent-soft); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:var(--font-head); color:var(--accent); font-size:var(--text-md)}
+.rev .nm{font-weight:500}
+.rev .dt{font-size:var(--text-2xs); color:var(--ink-soft)}
+/* кнопки-ссылки на профили отзывов (2ГИС / Яндекс). Базируются на .btn .btn-ghost .btn-sm —
+   та же анимация (transition + active scale), что у secondary-кнопок. Цвета — БРЕНДОВЫЕ
+   (как глифы мессенджеров), не из скина; перебивают только border/color/hover ghost-кнопки. */
+.rev-sources{display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-6)}
+.rev-src-gis{border-color:rgba(25,150,40,.45); color:#1f7a33}        /* 2ГИС — зелёный */
+.rev-src-gis:hover{border-color:#19aa1e; background:rgba(25,150,40,.10)}
+.rev-src-ya{border-color:rgba(214,160,0,.55); color:#946a00}         /* Яндекс — жёлтый/золотой */
+.rev-src-ya:hover{border-color:#e0a400; background:rgba(255,204,0,.14)}
+
+/* ============ FAQ ============ */
+.faq{margin:var(--space-8) 0 0; display:grid; gap:var(--space-2)}
+.qa{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden}
+.qa summary{list-style:none; cursor:pointer; padding:var(--space-4) var(--space-6); display:flex; gap:var(--space-3); align-items:flex-start; font-size:var(--text-sm); font-family:var(--font-head)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .pl{flex:none; width:20px; height:20px; position:relative; margin-top:3px; transition:transform .3s var(--ease)}
+.qa summary .pl::before,.qa summary .pl::after{content:""; position:absolute; background:var(--accent); transition:opacity .3s}
+.qa summary .pl::before{left:0; top:9px; width:20px; height:2px}
+.qa summary .pl::after{left:9px; top:0; width:2px; height:20px}
+.qa[open] summary .pl::after{opacity:0}
+/* левый отступ ответа = padding summary (24) + иконка (20) + gap (12), чтобы текст ответа совпал с текстом вопроса */
+.qa .ans{padding:0 var(--space-6) var(--space-6) calc(var(--space-6) + 20px + var(--space-3)); color:var(--ink-soft); font-size:var(--text-xs); animation:fade .3s var(--ease)}
+@keyframes fade{from{opacity:0; transform:translateY(-4px)}to{opacity:1}}
+
+/* ============ BOOKING FORM ============ */
+#booking{background:var(--bg)}
+.book{background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--space-8) var(--space-6); max-width:640px; margin:var(--space-8) auto 0; box-shadow:var(--shadow)}
+.field{margin-bottom:var(--space-4)}
+.field label{display:block; font-size:var(--text-xs); color:var(--ink-soft); margin-bottom:var(--space-2); letter-spacing:.02em}
+.field label .req{color:var(--accent-deep)}
+.field input,.field select{
+  width:100%; padding:var(--space-3) var(--space-4); background:var(--bg); color:var(--ink);
+  border:1px solid var(--line); border-radius:var(--r-md); font-family:inherit; font-size:var(--text-sm);
+  transition:border-color .2s, box-shadow .2s;
+}
+.field input:focus,.field select:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft)}
+.field input.err,.field select.err{border-color:#c0563f; box-shadow:0 0 0 3px rgba(192,86,63,.18)}
+.field select{appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%238A8A8A' stroke-width='2'%3E%3Cpath d='M2 4l5 6 5-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right var(--space-4) center; padding-right:38px}
+.field .msg{font-size:var(--text-2xs); color:#a23c27; margin-top:var(--space-2); display:none}  /* затемнён до AA 4.5:1 на bg-2 (был #c0563f 4.1:1) */
+.field.invalid .msg{display:block}
+/* равные отступы: вертикаль внутри .two держит только gap (не задваивать с margin) */
+.two{display:grid; gap:var(--space-4); grid-template-columns:minmax(0,1fr); margin-bottom:var(--space-4)}
+.two .field{margin-bottom:0}
+@media (min-width:520px){.two{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:520px){.two:has(#masterField[hidden]){grid-template-columns:minmax(0,1fr)}}
+@media (min-width:520px){.two:has(#serviceField[hidden]){grid-template-columns:minmax(0,1fr)}}
+.book .note{font-size:var(--text-2xs); color:var(--ink-soft); text-align:center; margin-top:var(--space-3)}
+/* согласие на обработку ПДн (152-ФЗ): обязательный чекбокс, НЕ предзаполнен */
+.consent{margin-top:var(--space-1)}
+.consent-label{display:flex; gap:var(--space-2); align-items:flex-start; cursor:pointer; font-size:var(--text-xs); color:var(--ink); line-height:1.5}
+.consent-label input{appearance:none; -webkit-appearance:none; flex:none; width:18px; height:18px; margin:1px 0 0; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--bg); cursor:pointer; position:relative; transition:border-color .2s, background .2s}
+.consent-label input:checked{background:var(--accent); border-color:var(--accent)}
+.consent-label input:checked::after{content:""; position:absolute; left:5px; top:1px; width:5px; height:9px; border:solid var(--btn-ink); border-width:0 2px 2px 0; transform:rotate(45deg)}
+.consent-label input:focus-visible{outline:none; box-shadow:0 0 0 3px var(--accent-soft)}
+.consent-label a{color:var(--accent-deep); text-decoration:underline; text-underline-offset:2px}
+.consent.invalid .consent-label input{border-color:#c0563f; box-shadow:0 0 0 3px rgba(192,86,63,.18)}
+.consent.invalid .msg{display:block}
+.success{display:none; flex-direction:column; align-items:center; text-align:center; padding:var(--space-4) var(--space-2)}
+.success.show{display:flex; animation:pop .4s var(--ease)}
+@keyframes pop{from{opacity:0; transform:scale(.94)}to{opacity:1; transform:none}}
+.success .check{width:74px; height:74px; border-radius:50%; background:rgba(74,160,98,.16); border:1px solid rgba(108,196,134,.5); display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-4)}
+.success .check svg{width:38px; height:38px; stroke:#3aa564; stroke-width:2.4; fill:none}
+.success h3{font-size:var(--text-xl); margin:0 0 var(--space-2); color:var(--ink)}
+.success p{color:var(--ink-soft); margin:0 0 var(--space-6)}
+
+/* ============ CONTACTS ============ */
+.contact-grid{display:grid; gap:var(--space-6); grid-template-columns:minmax(0,1fr); margin-top:var(--space-8)}
+@media (min-width:880px){.contact-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}}
+.cinfo{display:grid; gap:var(--space-4); align-content:start}
+.crow{display:flex; gap:var(--space-3); align-items:flex-start}
+.crow .ic{flex:none; width:42px; height:42px; border:1px solid var(--line); border-radius:var(--r-md); display:flex; align-items:center; justify-content:center; color:var(--accent)}
+.crow .ic svg{width:20px; height:20px; stroke:currentColor; fill:none}
+.crow h3{margin:0 0 var(--space-1); font-size:var(--text-2xs); text-transform:uppercase; letter-spacing:.18em; color:var(--ink-soft); font-family:var(--font-body); font-weight:500}
+.crow p,.crow a{margin:0; font-size:var(--text-sm); color:var(--ink)}
+.crow a:hover{color:var(--accent-deep)}
+.contact-actions{display:flex; gap:var(--space-2); flex-wrap:wrap; margin-top:var(--space-3)}
+.map{border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--line); min-height:380px; box-shadow:var(--shadow-soft); background:var(--bg-2)}
+.map iframe{width:100%; height:100%; min-height:330px; border:0; display:block}
+/* «Внутри» теперь отдельная секция (#officeBlock) — ритм даёт section{padding}, свой margin не нужен */
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line); padding:var(--space-8) 0 var(--space-6); color:var(--ink-soft); font-size:var(--text-2xs)}
+.foot{display:flex; flex-wrap:wrap; gap:var(--space-3); justify-content:space-between; align-items:center}
+.foot-meta{display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-4); align-items:center}
+.foot-link{color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px}
+.foot-link:hover{color:var(--accent-deep)}
+
+/* ============ STICKY + FLOAT ============ */
+.floats{position:fixed; right:var(--space-4); bottom:var(--space-6); z-index:36; display:flex; flex-direction:column; gap:var(--space-3)}
+.fab{width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-soft); transition:transform .2s var(--ease)}
+.fab:hover{transform:translateY(-3px) scale(1.05)}
+.fab svg{width:26px; height:26px}
+.fab.wa{background:#1faf54}
+.fab.tg{background:#2aabee}
+.fab.vk{background:#07f}
+.fab.max{background:linear-gradient(45deg,#34A8F0,#7C34DD)}   /* Max: фирменный градиент (цвета сняты с логотипа-картинки; глиф — официальный SVG) */
+/* липкая кнопка (флаг STICKY_CTA): только мобайл/планшет, на десктопе скрыта */
+.sticky-cta{position:fixed; left:var(--space-4); right:var(--space-4); bottom:var(--space-4); z-index:35; display:none; box-shadow:0 12px 30px -10px rgba(0,0,0,.4)}
+@media (max-width:899px){
+  body.sticky-on .sticky-cta{display:inline-flex}
+  body.sticky-on{padding-bottom:84px}
+  body.sticky-on .floats{bottom:88px}
+}
+
+/* ============ COOKIE NOTICE (флаг COOKIE_NOTICE; включать только при наличии аналитики/куки) ============ */
+.cookie-bar{position:fixed; left:var(--space-4); right:var(--space-4); bottom:var(--space-4); z-index:45;
+  background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow);
+  padding:var(--space-4); display:flex; gap:var(--space-4); align-items:center; flex-wrap:wrap; justify-content:space-between}
+.cookie-text{margin:0; font-size:var(--text-xs); line-height:1.5; color:var(--ink-soft); max-width:74ch}
+.cookie-text a{color:var(--accent-deep); text-decoration:underline; text-underline-offset:2px}
+.cookie-bar .btn{flex:none}
+@media (max-width:560px){.cookie-bar{left:var(--space-2); right:var(--space-2); bottom:var(--space-2)}}
+
+/* ============ LIGHTBOX ============ */
+.lb{position:fixed; inset:0; z-index:60; background:var(--lb-bg); backdrop-filter:blur(4px);
+  display:none; align-items:center; justify-content:center; opacity:0; transition:opacity .25s var(--ease)}
+.lb.open{display:flex; opacity:1}
+.lb img{max-width:92vw; max-height:84vh; border-radius:var(--r-md); box-shadow:0 30px 80px -20px #000;
+  transform:scale(.96); transition:transform .3s var(--ease); user-select:none; -webkit-user-drag:none}
+.lb.open img{transform:scale(1)}
+/* контролам лайтбокса нужен z-index:2 — фото создаёт свой stacking-контекст (scale) и
+   при равном z-index перекрывало бы левую стрелку (она в DOM до <img>) */
+.lb-close{position:absolute; z-index:2; top:var(--space-4); right:var(--space-4); width:46px; height:46px; border-radius:50%;
+  background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22); color:#fff; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:.2s}
+.lb-close:hover{background:var(--accent); border-color:rgba(255,255,255,.4)}
+.lb-close svg{width:20px; height:20px; stroke:currentColor; fill:none}
+.lb-nav{position:absolute; z-index:2; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); color:#fff; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:.2s}
+.lb-nav:hover{background:var(--accent); border-color:rgba(255,255,255,.4)}
+.lb-nav svg{width:22px; height:22px; stroke:currentColor; fill:none}
+.lb-prev{left:var(--space-3)} .lb-next{right:var(--space-3)}
+.lb-count{position:absolute; z-index:2; bottom:var(--space-4); left:50%; transform:translateX(-50%); font-size:var(--text-xs); color:#fff; letter-spacing:.1em}
+/* акцент-номер осветлён под тёмный фон лайтбокса (AA): скин-акцент мог не дотягивать (индиго 4.2:1) */
+.lb-count b{color:color-mix(in srgb, var(--accent) 60%, #fff)}
+@media (max-width:640px){.lb-nav{width:42px;height:42px} .lb-prev{left:var(--space-1)} .lb-next{right:var(--space-1)}}
+
+/* reveal */
+.reveal{opacity:0; transform:translateY(20px); transition:opacity .6s var(--ease), transform .6s var(--ease)}
+.reveal.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1 !important; transform:none !important; transition:none !important}
+  *{animation-duration:.001ms !important; transition-duration:.05ms !important}
+  .gal-item:hover img,.svc:hover .svc-ph img,.master:hover .master-ph img{transform:none}
+}
+</style>
+
+<!-- ВИДЕО-HERO: изолированный компонент .hv-* (флаг HERO_MEDIA="video"). Отдельный <style>
+     ПОСЛЕ основного — не переопределяет токены/размеры Зоны C, добавляет только новый компонент. -->
+<style>
+/* ============ ВИДЕО-HERO (флаг HERO_MEDIA="video", данные HERO_VIDEOS) ============
+   Горизонтальная scroll-snap карусель вертикальных клипов 9:16 — «инстаграм-лента».
+   Автоплей только активного слайда (IntersectionObserver, JS ниже). */
+.hv{ width:100%; max-width:340px; margin:0 0 0 auto; }  /* десктоп: прижат к правому краю контента (не центр колонки) */
+.hv-track{
+  display:flex; overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  border-radius:var(--r-lg); border:1px solid var(--line); box-shadow:var(--shadow);
+  background:var(--ph-bg); scrollbar-width:none;
+}
+.hv-track::-webkit-scrollbar{ display:none; }
+/* нейтрализуем скелетное правило .hero-media img (рамка/тень/aspect 4/5) для постеров карусели */
+.hv img{ border:0; border-radius:0; box-shadow:none; aspect-ratio:auto; background:transparent; }
+.hv-slide{
+  position:relative; flex:0 0 100%; scroll-snap-align:center; scroll-snap-stop:always;
+  aspect-ratio:9/16; background:var(--ph-bg); overflow:hidden;
+}
+.hv-slide video, .hv-slide .hv-poster{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+}
+.hv-slide .hv-poster{ z-index:0; }
+.hv-slide video{ z-index:1; opacity:0; transition:opacity .4s var(--ease); }
+.hv-slide.playing video{ opacity:1; }
+/* статичный бейдж 2ГИС поверх каждого клипа (нижний угол, не двигается) */
+.hv-badge{
+  position:absolute; left:var(--space-3); bottom:var(--space-3); z-index:3;
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(21,18,13,.62); color:#fff; border-radius:var(--r-md);
+  padding:6px 10px; font-size:var(--text-2xs); line-height:1; letter-spacing:.02em;
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
+}
+.hv-badge .st{ color:var(--accent); font-size:13px; }
+.hv-badge b{ font-family:var(--font-head); font-weight:var(--font-head-weight); font-size:var(--text-sm); letter-spacing:.03em; }
+/* кнопка play — только в режиме энергосбережения / reduced-motion */
+.hv-play{
+  position:absolute; inset:0; z-index:4; display:none; align-items:center; justify-content:center;
+  background:rgba(21,18,13,.28); border:0; cursor:pointer; color:#fff;
+}
+.hv-slide.saver .hv-play{ display:flex; }
+.hv-play span{
+  width:60px; height:60px; border-radius:50%; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.6);
+  display:flex; align-items:center; justify-content:center;
+}
+.hv-play svg{ width:26px; height:26px; margin-left:3px; fill:#fff; }
+/* стрелки перелистывания — только десктоп (на тач хватает свайпа/точек) */
+.hv-stage{ position:relative; }
+.hv-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+  display:none; align-items:center; justify-content:center;
+  width:44px; height:44px; border-radius:50%; cursor:pointer;
+  background:rgba(21,18,13,.55); color:#fff; border:1px solid rgba(255,255,255,.35);
+  -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
+  transition:background .2s var(--ease), transform .2s var(--ease);
+}
+.hv-arrow:hover{ background:var(--accent); border-color:var(--accent); }
+.hv-arrow:active{ transform:translateY(-50%) scale(.94); }
+.hv-arrow.prev{ left:10px; }
+.hv-arrow.next{ right:10px; }
+.hv-arrow svg{ width:22px; height:22px; }
+@media (min-width:900px){ .hv-arrow{ display:flex; } }
+
+/* точки-индикаторы */
+.hv-dots{ display:flex; justify-content:center; gap:var(--space-2); margin-top:var(--space-4); }
+.hv-dot{
+  width:8px; height:8px; padding:0; border-radius:50%; border:0; cursor:pointer;
+  background:var(--line); transition:background .2s var(--ease), transform .2s var(--ease);
+}
+.hv-dot.active{ background:var(--accent); transform:scale(1.3); }
+@media (max-width:899px){ .hv{ max-width:none; margin:0; } }  /* мобайл: во всю ширину контента (в один край с текстом hero) */
+@media (prefers-reduced-motion:reduce){ .hv-slide video{ transition:none; } }
+</style>
+
+<!-- ============================================================================
+     ЗОНА A2 — ФАКТУРА НАПРАВЛЕНИЯ (опционально, по умолчанию пусто).
+     Единственное легальное место для CSS-ПРАВИЛ скина: псевдоэлементы (зерно,
+     кляксы, стенсил-цифры), clip-path секций, дуотоны. Токены — в Зоне A,
+     правила — здесь. Блок стоит после Зоны C, поэтому выигрывает каскад честно,
+     без !important. В Зону C по-прежнему не лезть.
+     ============================================================================ -->
+<style id="zoneA2">
+/* --- §8.4 Органик: фактура. Мягкий тёплый свет в негативном пространстве + глиняная
+   деталь у надзаголовков. Только Зона A2, без !important, Зона C не тронута. --- */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(58% 42% at 12% -4%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 68%),
+    radial-gradient(48% 40% at 104% 108%, color-mix(in srgb, var(--clay) 9%, transparent), transparent 70%);
+}
+/* маленькая глиняная «веточка»-штрих перед надзаголовком секции (мелкая деталь) */
+.eyebrow::before{
+  content:""; flex:none; width:18px; height:2px; border-radius:999px;
+  background:var(--clay); opacity:.85;
+}
+.hero h1 em, .hero .offer em{ font-style:italic; }   /* Spectral italic — мягкая, рукописная нота акцента */
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top"><img class="brand-logo" id="brandLogo" src="images/logo.webp" alt="" width="44" height="44"><span class="brand-name" id="brandName"></span></a>
+    <nav class="nav" id="nav">
+      <a class="nav-link" href="#works">Работы</a>
+      <a class="nav-link" href="#services">Услуги</a>
+      <a class="nav-link" href="#about">О нас</a>
+      <a class="nav-link" href="#reviews">Отзывы</a>
+      <a class="nav-link" href="#faq">Вопросы</a>
+      <a class="tel" id="navTel" href="#">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        <span class="tel-num"></span>
+      </a>
+      <a class="btn btn-primary btn-sm nav-cta" id="navCta" href="#booking"></a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav"><span></span></button>
+  </div>
+</header>
+
+<!-- ===== HERO (сплит; заполняет applySite из SITE.hero) ===== -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow reveal" id="heroEyebrow"></p>
+      <h1 class="reveal" id="heroH1"></h1>
+      <p class="offer reveal" id="heroOffer"></p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-primary" id="heroCtaPrimary" href="#booking"></a>
+        <a class="btn btn-ghost" id="heroCtaSecondary" href="#services"></a>
+      </div>
+    </div>
+    <div class="hero-media reveal" id="heroMedia">
+      <img id="heroPhoto" alt="" loading="eager">
+      <div class="hero-badge" id="heroBadge">
+        <span class="st">★</span>
+        <span class="val" id="heroBadgeVal"></span>
+        <span class="meta" id="heroBadgeMeta"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST STRIP (опц., из TRUST) ===== -->
+<section id="trust" hidden>
+  <div class="wrap">
+    <div class="trust" id="trustGrid"></div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="works">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="worksEyebrow">Наши работы</p>
+    <h2 class="title reveal" id="worksTitle">Заголовок блока работ - плейсхолдер</h2>
+    <p class="lead reveal" id="worksLead">Подзаголовок блока работ - плейсхолдер. Нажмите на снимок, чтобы открыть на весь экран.</p>
+    <div class="tabs reveal" id="tabs"></div>
+    <div class="gal" id="gal"></div>
+    <div class="gal-more-wrap reveal"><button class="btn btn-ghost" id="galMore" type="button" aria-expanded="false">Посмотреть все</button></div>
+  </div>
+</section>
+
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="servicesEyebrow">Услуги и цены</p>
+    <h2 class="title reveal" id="servicesTitle">Заголовок блока услуг - плейсхолдер</h2>
+    <p class="lead reveal" id="servicesLead">Выберите услугу - она автоматически подставится в форму записи.</p>
+    <div class="svc-grid" id="svcGrid"></div>
+  </div>
+</section>
+
+
+<!-- ===== ABOUT + MASTERS ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <p class="eyebrow reveal" id="aboutEyebrow">О нас</p>
+        <h2 class="title reveal" id="aboutTitle">Заголовок блока «о нас» - плейсхолдер</h2>
+        <p class="lead reveal" id="aboutLead">Текст «о бизнесе» - плейсхолдер. Замените на реальный: чем вы отличаетесь и почему к вам стоит прийти.</p>
+        <ul class="about-points" id="aboutPoints"></ul>
+      </div>
+      <div class="about-photo reveal"><img id="aboutPhoto" alt="" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== MASTERS / TEAM (отдельная секция; скрывается целиком при пустом MASTERS) ===== -->
+<section id="team">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="mastersEyebrow">Команда</p>
+    <h2 class="title reveal" id="mastersTitle">Кто будет с вами работать</h2>
+    <div class="masters" id="masters"></div>
+  </div>
+</section>
+
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="reviewsEyebrow">Отзывы</p>
+    <h2 class="title reveal" id="reviewsTitle">Что говорят клиенты</h2>
+    <div class="rev-grid" id="revGrid"></div>
+    <div class="rev-sources reveal" id="revSources"></div>
+  </div>
+</section>
+
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="faqEyebrow">Вопросы</p>
+    <h2 class="title reveal" id="faqTitle">Частые вопросы</h2>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ===== BOOKING ===== -->
+<section id="booking">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="bookingEyebrow" style="justify-content:center">Онлайн-запись</p>
+    <h2 class="title reveal" id="bookingTitle" style="text-align:center">Запишитесь за минуту</h2>
+    <p class="lead reveal" id="bookingLead" style="margin:0 auto; text-align:center">Заполните данные — мы перезвоним и подтвердим время. Без&nbsp;предоплаты.</p>
+
+    <form class="book reveal" id="bookForm" novalidate>
+      <div class="field">
+        <label for="f-name">Имя <span class="req">*</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться">
+        <div class="msg">Пожалуйста, введите имя.</div>
+      </div>
+      <div class="field">
+        <label for="f-phone">Телефон <span class="req">*</span></label>
+        <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__">
+        <div class="msg">Введите корректный номер: +7 и 10 цифр.</div>
+      </div>
+      <div class="two">
+        <div class="field" id="serviceField">
+          <label for="f-service">Услуга</label>
+          <select id="f-service" name="service"></select>
+        </div>
+        <div class="field" id="masterField">
+          <label for="f-master">Мастер</label>
+          <select id="f-master" name="master"></select>
+        </div>
+      </div>
+      <div class="field" id="timeField">
+        <label for="f-time">Удобное время</label>
+        <select id="f-time" name="time"></select>
+      </div>
+      <div class="consent" id="consentField">
+        <label class="consent-label">
+          <input id="f-consent" name="consent" type="checkbox">
+          <span>Я соглашаюсь с <a id="consentLink" href="policy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a> и даю согласие на обработку моих данных.</span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="submitBtn" style="margin-top:var(--space-4)"></button>
+      <p class="note">Только для подтверждения записи, без рекламных рассылок.</p>
+    </form>
+
+    <div class="book success" id="success" role="status" aria-live="polite">
+      <div class="check"><svg viewBox="0 0 24 24" stroke="#3aa564"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h3>Вы записаны!</h3>
+      <p>Мы скоро с вами свяжемся и подтвердим время.</p>
+      <button class="btn btn-ghost btn-sm" id="againBtn">Записать ещё</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== CONTACTS ===== -->
+<section id="contacts">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="contactsEyebrow">Контакты</p>
+    <h2 class="title reveal" id="contactsTitle">Как нас найти</h2>
+    <div class="contact-grid">
+      <div class="cinfo">
+        <div class="crow reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div><h3>Адрес</h3><p id="cAddress"></p>
+          <p id="cAddressNote" style="color:var(--ink-soft); font-size:var(--text-2xs); margin-top:var(--space-2)"></p></div>
+        </div>
+        <div class="crow reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <div><h3>Телефон</h3><a id="cPhone" href="#"></a></div>
+        </div>
+        <div class="crow reveal">
+          <span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div><h3>Часы работы</h3><p id="cHours"></p></div>
+        </div>
+        <div class="crow reveal" id="cEmailRow">
+          <span class="ic"><svg viewBox="0 0 24 24" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <div><h3>Почта</h3><a id="cEmail" href="#"></a></div>
+        </div>
+        <div class="contact-actions reveal" id="cActions"></div>
+      </div>
+      <div class="map reveal">
+        <iframe id="mapFrame" loading="lazy" title="Карта" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== INSIDE / OFFICE (отдельная секция; #officeBlock скрывается целиком при пустом OFFICE) ===== -->
+<section id="officeBlock">
+  <div class="wrap">
+    <p class="eyebrow reveal" id="officeEyebrow">Внутри</p>
+    <h2 class="title reveal" id="officeTitle">Атмосфера - плейсхолдер</h2>
+    <p class="lead reveal" id="officeLead">Подзаголовок блока интерьера - плейсхолдер.</p>
+    <div class="gal" id="office" style="margin-top:var(--space-6)"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span class="brand" style="font-size:var(--text-md)"><img class="foot-logo" id="footLogo" src="images/logo.webp" alt="" width="34" height="34"><span class="brand-name" id="footBrand"></span></span>
+    <span class="foot-meta"><a class="foot-link" id="footPolicy" href="policy.html">Политика конфиденциальности</a><span id="footCopy"></span></span>
+  </div>
+</footer>
+
+<!-- sticky CTA (флаг STICKY_CTA) -->
+<a class="sticky-cta btn btn-primary" id="stickyCta" href="#booking"></a>
+
+<!-- floats -->
+<div class="floats" id="floats"></div>
+
+<!-- cookie notice (флаг COOKIE_NOTICE; включать ТОЛЬКО при наличии аналитики/куки, напр. Яндекс.Метрики) -->
+<div class="cookie-bar" id="cookieBar" hidden>
+  <p class="cookie-text">Мы используем файлы cookie для корректной работы сайта и аналитики. Нажимая «Понятно», вы соглашаетесь с <a id="cookieLink" href="policy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
+  <button class="btn btn-primary btn-sm" id="cookieOk" type="button">Понятно</button>
+</div>
+
+<!-- lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <button class="lb-close" id="lbClose" aria-label="Закрыть"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Назад"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <img id="lbImg" alt="">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Вперёд"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+  <div class="lb-count"><b id="lbCur">1</b> / <span id="lbTot">1</span></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================================
+   ЗОНА B — ДАННЫЕ  (это всё, что правится под проект)
+   Памятки по контенту:
+   - Тире «—» (em-dash) — там, где это тире по-русски (приложение, разрыв): «Услуга — описание».
+     Дефис «-» — в компаундах (онлайн-запись, 152-ФЗ) и диапазонах (10:00-20:00, Пн-Пт).
+     Тире не открывает строку — это уже гарантирует typographer (правило 2), руками не клеить.
+   - Имена услуг — без скобок «()» и плюсов «+».
+   - Один лейбл действия на весь сайт = SITE.ctaLabel (шапка/липкая/карточки/форма).
+   - Заполненная (filled) кнопка — только глобальные CTA; карточные кнопки — ghost.
+   - Эмодзи в UI запрещены.
+   - Пустой контент-массив → его секция/табы не рендерятся (механизм «какие блоки берём»).
+   Значения ниже — ЯВНЫЕ плейсхолдеры: рендерится, но видно, что заглушка.
+   ============================================================================ */
+
+/* --- SITE: точные факты бизнеса. Один источник правды (applySite разносит по DOM). --- */
+var SITE = {
+  brand:   "Минус стресс",
+  niche:   "Массажный салон",
+  city:    "Новосибирск",
+
+  phone:   "+7 999 305-98-95",   // человекочитаемо; tel: соберёт скелет
+  wa:      "79993059895",        // только цифры; wa.me/ соберёт скелет. Пусто = скрыть
+  tg:      "nostressnsk",      // БЕЗ @ и БЕЗ +. t.me/+цифры НЕ открывает чат — скелет отвергает. Пусто = скрыть
+  vk:      "nostress_nsk",                   // username (скелет сам собирает vk.com/…; полный URL сюда нельзя — задвоит префикс)
+  email:   "nostressnsk@gmail.com",  // пусто = строку скрыть
+  youtube: "",                   // полный URL канала; пусто = кнопка скрыта
+  max:     "https://max.ru/u/f9LHodD0cOJBHdHIb8k266di-v_PN9PRyOvgRvAuiElEW0h5MOdVLJQ3u8A",                   // полный URL профиля Max; пусто = кнопка скрыта
+
+  address: ["​Улица Ленина, 12", "9-ый этаж, 901 офис"],
+  addressNote: "вход с лестницы под вывеской ТехноСити",
+  hours:   ["Ежедневно", "10:00-21:00"],
+
+  rating:  { value:"4,9", count:"408", source:"2ГИС", url:"https://go.2gis.com/Bmv48" },   // 2ГИС — главный: hero-бейдж + кнопка-ссылка. count = ОЦЕНКИ (→ JSON-LD ratingCount); опц. reviewsCount = отзывы (→ reviewCount)
+  ratingYa:{ value:"5,0", count:"327", url:"https://yandex.ru/maps/-/CTVl5S3h" },                  // Яндекс — вторая кнопка-ссылка под отзывами. value пусто → кнопка скрыта. url — ссылка на профиль (на боевом заполнить вместе с value)
+
+  mapCoords: [55.029722, 82.913477], // [lat, lng]. Карта строится по координатам, НИКОГДА по text=
+
+  hero: {
+    eyebrow: "Массаж и спа · Новосибирск",
+    h1:      "Массаж, за которым <em>возвращаются</em>",
+    offer:   "Тёплая студия в самом центре — сюда приходят снять напряжение и по-настоящему <em>выдохнуть</em>.",
+    photo:   "",                      // hero — видео-карусель (HERO_MEDIA="video"), статичное фото не нужно
+    ctaSecondary: "Услуги и цены"     // вторая кнопка hero; пусто = только основная
+  },
+  about: { photo:"office-01" },       // фото блока «О нас» — тёплый кабинет с панорамным окном
+  ctaLabel: "Записаться",             // основное действие везде
+
+  booking: { url:"" },                // боевая запись (clients.site/DIKIDI). Пусто = форма-заглушка
+
+  // Юр-слой (152-ФЗ): ссылка на политику обработки ПДн (файл рядом с сайтом). Подставляется в
+  // чекбокс формы, ссылку футера и cookie-баннер. Пусто = ссылок нет (при сборе данных это
+  // нарушение — заполните перед запуском). Реквизиты компании вписываются в policy.html.
+  legal: { policyUrl: "policy.html" },
+
+  // тип Schema.org для JSON-LD (локальное SEO). Бьюти → "BeautySalon" / "HealthAndBeautyBusiness";
+  // кофейня → "CafeOrCoffeeShop"; авто → "AutoRepair". Дефолт "LocalBusiness" подходит всем.
+  schemaType: "LocalBusiness",
+
+  og: { image:"https://nikita41478.github.io/NoStress/images/og.jpg",  // JPEG, не webp
+        url:  "https://nikita41478.github.io/NoStress/" }
+};
+
+/* --- Флаги блоков без данных --- */
+var STICKY_CTA   = true;   // липкая кнопка (скрыта на десктопе)
+var HERO_OVERLAY = false;  // true = фото фоном + затемнение + текст поверх (опц.)
+var COOKIE_NOTICE = false; // cookie-баннер. true ТОЛЬКО когда на сайте есть аналитика/куки (напр.
+                           // Яндекс.Метрика); пустой баннер на статике без кук не нужен и законом не требуется.
+var MASTER_IN_FORM  = true;  // false → поле «Мастер» в форме не рендерится и не уходит в сабмит (.two схлопывается)
+var MASTER_CARD_CTA = true;  // false → карточки мастеров без кнопки-прелинка «Записаться»
+var SERVICE_IN_FORM = true;  // false → поле «Услуга» скрыто и не заполняется. ⚠️ Прелинк с карточек услугу не передаёт — заявка придёт без неё
+var TIME_IN_FORM    = false; // поле «Удобное время». Дефолт false — поле бесполезно, включать только по явному запросу владельца бизнеса
+var FLOATS = ["vk","tg"];    // РФ: VK первым (TG под блок-риском). WhatsApp/Max — только в контактах
+var HERO_MEDIA  = "video";   // горизонтальная карусель вертикальных клипов 9:16 (данные HERO_VIDEOS)
+var HERO_VIDEOS = [
+  {src:"videos/hero-01.mp4", poster:"videos/hero-01.webp"},
+  {src:"videos/hero-02.mp4", poster:"videos/hero-02.webp"},
+  {src:"videos/hero-03.mp4", poster:"videos/hero-03.webp"}
+];
+
+/* --- Контент-массивы (синтезируются из reviews.md / services.md). Пустой → секция скрыта. --- */
+
+/* УСЛУГИ — два режима (см. SERVICES_MODE ниже):
+   • flat (дефолт) — карточка-на-услугу. Поля dur/img/desc ОПЦИОНАЛЬНЫ: нет поля → элемент
+     не рендерится. С img — фото-карточка (Fullhouse); без img — текстовая карточка (Brow Best),
+     получает класс .svc.no-photo (осознанная заглушка, не «сломанное фото»).
+   • grouped — карточка-категория с прайс-строками внутри (Buleeva) — массив SERVICE_GROUPS ниже. */
+var SERVICES = [];   // grouped-режим — используется SERVICE_GROUPS ниже
+
+/* Режим блока услуг. "flat" | "grouped". Фолбэк: непустой SERVICE_GROUPS → grouped. */
+var SERVICES_MODE = "grouped";
+/* grouped-режим — строго из services.md, цены как есть, без скобок/плюсов в именах. */
+var SERVICE_GROUPS = [
+  { id:"g-body", title:"Массаж тела", icon:"leaf",
+    items:[
+      {name:"Общий массаж, 60 минут", price:"3 000 ₽"},
+      {name:"Общий массаж, 90 минут", price:"4 200 ₽"},
+      {name:"Шейно-воротниковая зона", price:"2 000 ₽", note:"30 минут"},
+      {name:"Спортивный массаж", price:"3 300 ₽", note:"60 минут"},
+      {name:"Массаж для беременных", price:"2 000–3 000 ₽", note:"30 или 60 минут, со II триместра"}
+    ],
+    desc:"Классический, расслабляющий или спортивный — формат подбирают под ваш запрос. Действуют абонементы на 5 и 10 сеансов." },
+
+  { id:"g-anti", title:"Антицеллюлитный массаж", icon:"sparkle",
+    items:[
+      {name:"30 минут", price:"2 650 ₽", note:"ноги, ягодицы"},
+      {name:"45 минут", price:"3 500 ₽", note:"ноги, ягодицы, бока, руки"},
+      {name:"60 минут", price:"3 850 ₽", note:"всё тело"}
+    ],
+    desc:"Курсом заметнее — доступны абонементы на 5 и 10 сеансов." },
+
+  { id:"g-face", title:"Массаж лица", icon:"heart",
+    items:[
+      {name:"Классический массаж лица", price:"2 500 ₽", note:"45 минут"},
+      {name:"Миофасциальный массаж лица", price:"2 800 ₽"},
+      {name:"Коруги", price:"2 800 ₽"},
+      {name:"Скульптурно-буккальный", price:"2 800 ₽"}
+    ],
+    desc:"Мягкая работа с мышцами лица — тонус, контур и ощущение отдохнувшей кожи." },
+
+  { id:"g-app", title:"Аппаратные методики", icon:"grid",
+    items:[
+      {name:"RF-лифтинг", price:"2 300 ₽"},
+      {name:"Вакуумный массаж LPG", price:"2 700 ₽"},
+      {name:"Кавитация", price:"2 500 ₽"},
+      {name:"Миостимуляция", price:"2 000 ₽"}
+    ],
+    desc:"Программы для тонуса кожи и тела. Курсом выгоднее — есть абонементы на 5 и 10 сеансов." },
+
+  { id:"g-spa", title:"Спа-программы", icon:"star",
+    items:[
+      {name:"Сила Севера", price:"4 500 ₽", note:"90 минут — пилинг, массаж, банки, массаж головы"},
+      {name:"Весеннее настроение", price:"4 500 ₽", note:"90 минут — малиновый пилинг, массаж, массаж головы"},
+      {name:"Тающее наслаждение", price:"5 500 ₽", note:"120 минут — винный пилинг и обёртывание, свеча или камни"},
+      {name:"Тропический бриз", price:"5 500 ₽", note:"130 минут — пилинг манго, обёртывание, массаж лица"},
+      {name:"Сладкая жизнь", price:"5 500 ₽", note:"120 минут — шоколадный пилинг и обёртывание, массаж головы"}
+    ],
+    desc:"Ритуалы с пилингом, обёртыванием и массажем — на полтора-два часа полного отдыха." },
+
+  { id:"g-add", title:"Дополнения к сеансу", icon:"list",
+    items:[
+      {name:"Массаж горячими камнями", price:"500 ₽"},
+      {name:"Ароматерапия", price:"500 ₽"},
+      {name:"Вакуумные банки", price:"600 ₽"},
+      {name:"Скребки гуаша", price:"500 ₽"},
+      {name:"Горячая свеча", price:"200 ₽"},
+      {name:"Массажный крем вместо масла", price:"100 ₽"}
+    ],
+    desc:"Небольшие дополнения, которыми можно усилить любой сеанс." }
+];
+
+var MASTERS = [
+  {id:"anzhelika", name:"Анжелика", img:"master-ph",
+   bio:"Работает мягко и точечно — снимает зажимы и возвращает телу лёгкость. Ведёт массаж лица (коруги, скульптурно-буккальный) и спа; к ней возвращаются годами."},
+  {id:"alena", name:"Алёна", img:"master-ph",
+   bio:"Мастер глубокой проработки — мягкий формат не про неё. Делает диагностику до сеанса и даёт рекомендации после. За её работой возвращаются снова."},
+  {id:"anastasia2", name:"Анастасия", img:"master-ph",
+   bio:"Сильные, внимательные руки: прорабатывает проблемные зоны по запросу и хорошо чувствует триггерные точки. Ведёт и ручной, и аппаратный массаж."},
+  {id:"maksim", name:"Максим", img:"master-ph",
+   bio:"Уверенные руки — к нему идут за классическим и антицеллюлитным массажем. Находит проблемные зоны и подбирает под них технику."},
+  {id:"olesya", name:"Олеся", img:"master-ph",
+   bio:"Работает глубоко и вдумчиво, с фокусом на зажатые зоны. Внимательна к ощущениям — многие расслабляются у неё с первого сеанса."},
+  {id:"natalia", name:"Наталья", img:"master-ph",
+   bio:"Чуткий мастер: уточняет запрос, проводит осмотр и ведёт интенсивную, но бережную проработку. Отдельно работает с триггерными точками."},
+  {id:"olga", name:"Ольга", img:"master-ph",
+   bio:"Классический и спортивный массаж, при запросе — очень интенсивно. Держит баланс между нагрузкой и расслаблением."},
+  {id:"darya", name:"Дарья", img:"master-ph",
+   bio:"Работает и мягко, и сильно, любит миофасциальный массаж — глубоко, но без лишнего дискомфорта. Ведёт массаж для беременных и детский, от 7 лет."},
+  {id:"anastasia1", name:"Анастасия", img:"master-ph",
+   bio:"Подстраивает интенсивность под вас, но по призванию — за основательную, глубокую проработку. Ведёт ручной и аппаратный массаж, массаж лица и спа."},
+  {id:"aleksandr", name:"Александр", img:"master-ph",
+   bio:"Мягкий, медленный, проминающий массаж. Большие тёплые руки и спокойный темп — за ощущением заботы и снятым напряжением идут к нему."}
+];
+
+var REVIEWS = [
+  // дословно из 2ГИС — эмодзи сняты, слова не переписаны
+  {name:"Ольга Черноярова", date:"2ГИС · 29 мая 2026",
+   text:"Всё прекрасно! Уютно, приятно, ненавязчиво, после массажа не выходишь, а вытекаешь, настолько массаж расслабляет!"},
+  {name:"Александр Бернштейн", date:"2ГИС · 4 апреля 2026",
+   text:"Уютная студия массажа в самом центре города. Много раз дарил сюда сертификаты близким — всегда только положительные эмоции! А сегодня и для себя наконец-то нашлось время. Попав на сеанс к массажисту Алене, я точно могу сказать — она мастер своего дела. Все прошло идеально по всем параметрам. Очень рекомендую!"},
+  {name:"Наталья Ростова", date:"2ГИС · 20 мая 2026",
+   text:"Удобное расположение салона в центре города. Чистота, уют и расслабляющая музыка прекрасно настраивают на процедуры. Доброжелательные, вежливые сотрудники. Большая благодарность мастеру по массажу Максиму — профессионал своего дела! Внимательный, точно определил проблемные зоны, использовал правильные техники, которые помогли расслабиться и избавиться от напряжения."},
+  {name:"Лариса", date:"2ГИС · 24 мая 2026",
+   text:"Салон очень удобно расположен, в центре города. Очень уютная атмосфера, приятный и вежливый персонал, делала массаж ШВЗ у мастера Анастасии, она мастер своего дела, получила огромное удовольствие и облегчение в проблемной зоне. После массажа предложили травяной чай. Обязательно вернусь в это место."},
+  {name:"Lidia Kolesnikova", date:"2ГИС · 8 июня 2026",
+   text:"Много лет не была на массаже, сходила на массаж воротниковой зоны к Олесе, осталась в полном восторге. Очень расслабилась и обновилась за 30 мин! Рекомендую"},
+  {name:"Елена Ру", date:"2ГИС · 9 марта 2026",
+   text:"Сегодня побывала в студии на общем массаже. Мне очень понравилась студия и массажист. Благодарю, Алёну, она профессионал своего дела помогла снять напряжение, по-настоящему расслабиться. Очень приятная атмосфера в студии. Отличная фоновая музыка для массажа. Чистота, что для меня очень важно. Я пришла по подарочному сертификату, который мне подарили на Новый год."},
+  {name:"Анна Анина", date:"2ГИС · 6 марта 2026",
+   text:"Я с вами много-много лет и это по-прежнему приятное уютное место, где встречают приветливые добрые администраторы, всегда чисто, мастера внимательны к тебе, и каждый сеанс проходит в зависимости от моего состояния и пожеланий. Здесь действительно расслабляешься и на час отключаешься от суеты. Огромная благодарность мастеру Анжелике."},
+  {name:"Apple User", date:"2ГИС · 28 апреля 2023",
+   text:"Отличная студия массажа, удобное местоположение. Брала первый массаж, мастер Анастасия. Замечательные 60 минут релакса. Комфортный массаж, почувствовала «триггерные» точки, расслабление на всё тело. Провели диагностику, узнала свои «проблемные» места. Персональный подход к каждому клиенту, дают рекомендации после массажа. После массажа чаепитие."}
+];
+
+var FAQ = [
+  {q:"Первый раз у вас — что взять с собой и как подготовиться?",
+   a:"Ничего готовить не нужно, всё необходимое есть на месте, при желании можно принять душ до или после сеанса. Перед массажем мастер спросит о пожеланиях, самочувствии и зонах, которым нужно внимание. Приходите за пару минут до времени записи."},
+  {q:"Массаж — это больно? Насколько сильно вы работаете?",
+   a:"Силу подбирают под вас: от мягкого расслабляющего до глубокой проработки. Мастер уточняет ощущения по ходу сеанса, поэтому интенсивность всегда можно скорректировать прямо на кушетке."},
+  {q:"Есть ли противопоказания?",
+   a:"Да, у массажа есть противопоказания. При беременности, острых состояниях и хронических заболеваниях предупредите мастера заранее и при необходимости проконсультируйтесь с врачом. Массаж для беременных проводим со второго триместра и при отсутствии противопоказаний."},
+  {q:"Можно записаться к конкретному мастеру?",
+   a:"Конечно. У каждого мастера своя техника и сильные стороны — выберите его в форме записи или скажите администратору. Если пока не определились, подберём мастера под ваш запрос."},
+  {q:"Как вас найти? Где вход и что с парковкой?",
+   a:"Мы в центре, на улице Ленина, 12, 9-й этаж, офис 901. Вход — с лестницы под вывеской «ТехноСити», дальше на лифте на 9-й этаж. Парковка в центре ограничена, удобнее добраться на метро или такси."},
+  {q:"У вас есть подарочные сертификаты?",
+   a:"Да, есть подарочные сертификаты — бумажные и электронные, на сумму или на конкретную программу. Хороший вариант, когда хочется подарить близкому отдых и заботу о себе."}
+];
+
+var TRUST = [
+  {icon:"star", big:"4,9",       small:"средний рейтинг в 2ГИС по 408 оценкам"},
+  {icon:"heart", big:"10 мастеров", small:"у каждого своя техника — выбирайте под запрос"},
+  {icon:"leaf", big:"В центре",  small:"ул. Ленина, 12 — в самом центре города"}
+];
+
+// материал однородный (в основном ручной массаж) → единая сетка без табов; feature — тёплый атмосферный кадр
+var WORK_FILES = [
+  {file:"work-06", feature:true},
+  "work-22","work-02","work-10","work-13","work-01","work-15","work-27","work-24","work-08","work-21","work-05",
+  "work-03","work-04","work-07","work-09","work-11","work-12","work-14","work-17","work-18","work-19","work-20",
+  "work-23","work-25","work-26","work-28","work-29","work-30","work-31","work-32","work-33","work-34","work-35","work-16"
+];
+var CAT  = {};
+var TABS = [{id:"all", label:"Все работы"}];          // один таб → табы скрыты, просто сетка
+var OFFICE = ["office-11","office-06","office-05","office-03","office-02","office-04"];  // интерьер и атмосфера
+
+/* TIMES — генерится скелетом из SITE.hours (см. buildTimes ниже). Руками не заполнять. */
+
+/* --- COPY: копирайт секций (eyebrow / title / lead). Правишь и полируешь сам.
+   Это НЕ факты бизнеса (они в SITE) и НЕ синтез из reviews/services (он в массивах) —
+   это твой текст заголовков. --- */
+var COPY = {
+  works:    { eyebrow:"Как это проходит", title:"Спокойствие, которое видно",
+              lead:"Тёплый свет, тихая музыка и внимательные руки мастеров. Нажмите на снимок, чтобы рассмотреть ближе." },
+  services: { eyebrow:"Услуги и цены", title:"Массаж, спа и уход за лицом",
+              lead:"От оздоровительного массажа до аппаратных методик и спа-программ. Цены — за один сеанс; курсом выгоднее." },
+  about:    { eyebrow:"О студии", title:"Место, где тело выдыхает",
+              lead:"«Минус стресс» — студия массажа в самом центре Новосибирска. Сюда приходят не разово, а регулярно: снять напряжение после работы, вернуть телу лёгкость и побыть в тишине." },
+  team:     { eyebrow:"Команда", title:"Мастера, к которым возвращаются" },
+  reviews:  { eyebrow:"Отзывы", title:"Что говорят гости" },
+  faq:      { eyebrow:"Вопросы", title:"Коротко о важном" },
+  booking:  { eyebrow:"Онлайн-запись", title:"Запишитесь на сеанс",
+              lead:"Оставьте имя и телефон — перезвоним, подберём время и подтвердим запись. Можно сразу выбрать мастера и услугу." },
+  contacts: { eyebrow:"Контакты", title:"Как нас найти" },
+  office:   { eyebrow:"Внутри", title:"Тихо, чисто, по-домашнему",
+              lead:"Панорамные кабинеты на 9-м этаже, комната отдыха и травяной чай после сеанса." }
+};
+
+/* --- ABOUT_POINTS: преимущества в блоке «о нас». icon = ключ из ICONS
+   (check/shield/clock/star/heart/sparkle/leaf…). Пусто → список скрыт. --- */
+var ABOUT_POINTS = [
+  { icon:"heart",   title:"К своему мастеру", text:"У каждого мастера своя техника — найдите своего и возвращаетесь именно к нему." },
+  { icon:"leaf",    title:"Тихо и по-домашнему", text:"Спокойная музыка, чистота и внимательный администратор — напряжение отпускает уже на входе." },
+  { icon:"sparkle", title:"Разбираемся в запросе", text:"Спрашиваем о самочувствии, подбираем силу массажа и прорабатываем зажимы»." },
+  { icon:"check",   title:"Забота после сеанса", text:"Травяной чай, комната отдыха и рекомендации, что делать дома, чтобы эффект держался дольше." }
+];
+
+
+/* ============================================================================
+   ЗОНА C — СКЕЛЕТ (замок): рендер, компоненты, баг-фиксы. Под проект не редактируется.
+   ============================================================================ */
+var $ = function(s,r){return (r||document).querySelector(s);};
+function el(html){var t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstChild;}
+var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+var zoomIco='<span class="zoom"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg></span>';
+function IMG(name){ return "images/"+name+".webp"; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+/* встроенный набор иконок скелета (stroke=currentColor, единый тонколинейный стиль).
+   Используется и в полосе доверия (TRUST), и как ведущие иконки кнопок (btnHTML). */
+var ICONS = {
+  check:'<svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M20 6 9 17l-5-5"/></svg>',
+  star:'<svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
+  heart:'<svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>',
+  sparkle:'<svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3v6m0 6v6m-9-9h6m6 0h6M6 6l3 3m6 6 3 3m0-12-3 3M9 15l-3 3"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3l8 3v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6z"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  leaf:'<svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M5 21c0-9 7-15 16-15 0 9-6 16-15 16-1 0-1-1-1-1z"/><path d="M5 21C9 14 13 11 18 9"/></svg>',
+  calendar:'<svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  list:'<svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>',
+  grid:'<svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a7.5 7.5 0 0 1-10.8 6.7L5 19l1-3.8A7.5 7.5 0 1 1 20 11.5z"/></svg>',
+  whatsapp:'<svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9z"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>',
+  telegram:'<svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></svg>',
+  external:'<svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M19 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4"/></svg>',
+  vk:'<svg viewBox="0 0 24 24" class="brand"><path d="M13.16 18.94c-6.84 0-10.74-4.69-10.9-12.5h3.43c.11 5.73 2.63 8.15 4.63 8.65V6.44h3.23v4.95c1.97-.21 4.04-2.46 4.74-4.95h3.23c-.54 3.06-2.79 5.31-4.39 6.24 1.6.75 4.16 2.71 5.13 6.26h-3.56c-.76-2.36-2.65-4.19-5.15-4.44v4.44h-.39z"/></svg>',
+  youtube:'<svg viewBox="0 0 24 24" class="brand"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>',
+  max:'<svg viewBox="0 0 720 720" class="brand"><path d="M350.4,9.6C141.8,20.5,4.1,184.1,12.8,390.4c3.8,90.3,40.1,168,48.7,253.7,2.2,22.2-4.2,49.6,21.4,59.3,31.5,11.9,79.8-8.1,106.2-26.4,9-6.1,17.6-13.2,24.2-22,27.3,18.1,53.2,35.6,85.7,43.4,143.1,34.3,299.9-44.2,369.6-170.3C799.6,291.2,622.5-4.6,350.4,9.6h0ZM269.4,504c-11.3,8.8-22.2,20.8-34.7,27.7-18.1,9.7-23.7-.4-30.5-16.4-21.4-50.9-24-137.6-11.5-190.9,16.8-72.5,72.9-136.3,150-143.1,78-6.9,150.4,32.7,183.1,104.2,72.4,159.1-112.9,316.2-256.4,218.6h0Z"/></svg>'
+};
+/* белые SVG плавающих кнопок (на фирменном цветном круге). Ключи = каналы из FLOATS. */
+var FLOAT_ICONS = {
+  waFloat:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.359.101 11.892c0 2.096.549 4.142 1.595 5.945L0 24l6.305-1.654a11.962 11.962 0 005.71 1.454h.005c6.585 0 11.946-5.359 11.949-11.893a11.821 11.821 0 00-3.495-8.458"/></svg>',
+  tgFloat:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3 18.6 20c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.2 13.6 1.4 12c-1-.3-1-1 .2-1.5l19-7.3c.9-.3 1.6.2 1.3 1.1z"/></svg>',
+  vkFloat:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M13.16 18.94c-6.84 0-10.74-4.69-10.9-12.5h3.43c.11 5.73 2.63 8.15 4.63 8.65V6.44h3.23v4.95c1.97-.21 4.04-2.46 4.74-4.95h3.23c-.54 3.06-2.79 5.31-4.39 6.24 1.6.75 4.16 2.71 5.13 6.26h-3.56c-.76-2.36-2.65-4.19-5.15-4.44v4.44h-.39z"/></svg>',
+  maxFloat:'<svg viewBox="0 0 720 720" fill="#fff"><path d="M350.4,9.6C141.8,20.5,4.1,184.1,12.8,390.4c3.8,90.3,40.1,168,48.7,253.7,2.2,22.2-4.2,49.6,21.4,59.3,31.5,11.9,79.8-8.1,106.2-26.4,9-6.1,17.6-13.2,24.2-22,27.3,18.1,53.2,35.6,85.7,43.4,143.1,34.3,299.9-44.2,369.6-170.3C799.6,291.2,622.5-4.6,350.4,9.6h0ZM269.4,504c-11.3,8.8-22.2,20.8-34.7,27.7-18.1,9.7-23.7-.4-30.5-16.4-21.4-50.9-24-137.6-11.5-190.9,16.8-72.5,72.9-136.3,150-143.1,78-6.9,150.4,32.7,183.1,104.2,72.4,159.1-112.9,316.2-256.4,218.6h0Z"/></svg>'
+};
+/* какие иконки на кнопках (ключи из ICONS). Один лейбл действия = один значок. */
+var ICON_CTA="calendar", ICON_SERVICES="list", ICON_MORE="grid";
+function btnHTML(iconKey, label){ return (ICONS[iconKey]||"") + "<span>"+esc(label)+"</span>"; }
+
+/* TIMES из SITE.hours: ищем самый ранний открытие и самый поздний закрытие, шаг 1ч */
+function buildTimes(){
+  var min=24, max=0, found=false;
+  (SITE.hours||[]).forEach(function(h){
+    var m=String(h).match(/(\d{1,2}):\d{2}\s*[-–—]\s*(\d{1,2}):\d{2}/);
+    if(m){ found=true; min=Math.min(min,+m[1]); max=Math.max(max,+m[2]); }
+  });
+  if(!found){ min=10; max=21; }
+  var t=[]; for(var h=min; h<max; h++){ t.push((h<10?"0":"")+h+":00"); }
+  return t;
+}
+var TIMES = buildTimes();
+
+// рубль мельче цены + неразрывные пробелы внутри цены ("1 000 ₽" → "1 000 ₽")
+function priceHTML(p){
+  return p.replace(/\s*₽\s*$/, ' <span class="rub">₽</span>')
+          .replace(/(\d)\s+(\d)/g, '$1 $2');
+}
+
+/* ---------- applySite(): SITE → DOM (точные факты ровно в одном месте) ---------- */
+function tgValid(u){ return !!u && !/^\+/.test(u) && !/^\d+$/.test(u); }   // t.me/+цифры не открывает чат
+function setText(sel, val){ var n=$(sel); if(n) n.textContent = val==null?"":val; }
+function setHTML(sel, val){ var n=$(sel); if(n) n.innerHTML = val==null?"":val; }
+function setMeta(sel, val){ var n=document.querySelector(sel); if(n) n.setAttribute("content", val==null?"":val); }
+
+/* ---------- JSON-LD (Schema.org LocalBusiness) — динамически из SITE, для локального SEO ----------
+   Контент сайта и так рендерится из JS (Google исполняет JS), поэтому разметку тоже строим тут —
+   один источник правды. aggregateRating выводим ТОЛЬКО при реальных отзывах (плейсхолдер 0,0/0 → нет,
+   иначе Google штрафует за фейковый рейтинг). */
+function buildLD(digits, desc){
+  var DAY={"пн":"Monday","вт":"Tuesday","ср":"Wednesday","чт":"Thursday","пт":"Friday","сб":"Saturday","вс":"Sunday"};
+  var ORDER=["пн","вт","ср","чт","пт","сб","вс"];
+  function hoursSpec(){
+    var out=[];
+    (SITE.hours||[]).forEach(function(line){
+      var t=String(line).match(/(\d{1,2}:\d{2})\s*[-–—]\s*(\d{1,2}:\d{2})/);
+      if(!t) return;                                   // нет диапазона времени (выходной/круглосуточно) — пропускаем
+      var s=String(line).toLowerCase();
+      var dr=s.match(/(пн|вт|ср|чт|пт|сб|вс)\s*[-–—]\s*(пн|вт|ср|чт|пт|сб|вс)/);
+      var days=[];
+      if(dr){ var a=ORDER.indexOf(dr[1]), b=ORDER.indexOf(dr[2]); for(var i=a;i<=b;i++) days.push(DAY[ORDER[i]]); }
+      else { var sd=s.match(/(пн|вт|ср|чт|пт|сб|вс)/); if(sd) days.push(DAY[sd[1]]); }
+      if(days.length) out.push({"@type":"OpeningHoursSpecification","dayOfWeek":days,"opens":t[1],"closes":t[2]});
+    });
+    return out;
+  }
+  var data={
+    "@context":"https://schema.org",
+    "@type":SITE.schemaType||"LocalBusiness",
+    "name":SITE.brand,
+    "description":desc,
+    "url":(SITE.og&&SITE.og.url)||"",
+    "telephone":"+"+digits,
+    "address":{"@type":"PostalAddress","streetAddress":(SITE.address||[]).filter(Boolean).join(", "),"addressLocality":SITE.city,"addressCountry":"RU"}
+  };
+  if(SITE.og&&SITE.og.image) data.image=SITE.og.image;
+  if(SITE.mapCoords&&SITE.mapCoords.length===2) data.geo={"@type":"GeoCoordinates","latitude":SITE.mapCoords[0],"longitude":SITE.mapCoords[1]};
+  var spec=hoursSpec(); if(spec.length) data.openingHoursSpecification=spec;
+  var rv=parseFloat(String((SITE.rating&&SITE.rating.value)||"").replace(",","."));
+  var rc=parseInt(String((SITE.rating&&SITE.rating.count)||"").replace(/\D/g,""),10);
+  var rvc=parseInt(String((SITE.rating&&SITE.rating.reviewsCount)||"").replace(/\D/g,""),10);
+  if(rv>0 && rc>0){ data.aggregateRating={"@type":"AggregateRating","ratingValue":rv,"ratingCount":rc,"bestRating":5,"worstRating":1}; if(rvc>0) data.aggregateRating.reviewCount=rvc; }
+  var same=[];
+  if(SITE.vk) same.push(/^https?:/.test(SITE.vk)?SITE.vk:"https://vk.com/"+SITE.vk);
+  if(SITE.rating&&SITE.rating.url) same.push(SITE.rating.url);
+  if(SITE.ratingYa&&SITE.ratingYa.url) same.push(SITE.ratingYa.url);
+  if(tgValid(SITE.tg)) same.push("https://t.me/"+SITE.tg);
+  if(same.length) data.sameAs=same;
+  var node=document.getElementById("ldjson");
+  if(!node){ node=document.createElement("script"); node.type="application/ld+json"; node.id="ldjson"; document.head.appendChild(node); }
+  node.textContent=JSON.stringify(data);
+}
+
+function applySite(){
+  var digits = SITE.phone.replace(/\D/g,"");
+  var telHref = "tel:+"+digits;
+
+  /* --- бренд --- */
+  setText("#brandName", SITE.brand);
+  setText("#footBrand", SITE.brand);
+  document.getElementById("brandLogo").alt = "Логотип "+SITE.brand;
+  document.getElementById("footLogo").alt = "Логотип "+SITE.brand;
+
+  /* --- телефон (шапка + контакты) --- */
+  var navTel=$("#navTel"); navTel.setAttribute("href", telHref);
+  setText("#navTel .tel-num", SITE.phone);
+  var cPhone=$("#cPhone"); cPhone.setAttribute("href", telHref); cPhone.textContent=SITE.phone;
+
+  /* --- CTA-лейбл + иконка действия везде (один лейбл = один значок) --- */
+  setHTML("#navCta", btnHTML(ICON_CTA, SITE.ctaLabel));
+  setHTML("#heroCtaPrimary", btnHTML(ICON_CTA, SITE.ctaLabel));
+  setHTML("#submitBtn", btnHTML(ICON_CTA, SITE.ctaLabel));
+  setHTML("#stickyCta", btnHTML(ICON_CTA, SITE.ctaLabel));
+  setHTML("#againBtn", btnHTML(ICON_CTA, "Записать ещё"));
+
+  /* --- hero --- */
+  setText("#heroEyebrow", SITE.hero.eyebrow);
+  setHTML("#heroH1", SITE.hero.h1);
+  setHTML("#heroOffer", SITE.hero.offer);
+  var sec=$("#heroCtaSecondary");
+  if(SITE.hero.ctaSecondary){ sec.innerHTML=btnHTML(ICON_SERVICES, SITE.hero.ctaSecondary); }
+  else{ sec.setAttribute("hidden",""); }
+  var hero=$(".hero");
+  var heroVideo=(HERO_MEDIA==="video" && HERO_VIDEOS.length);
+  if(SITE.hero.photo){
+    var hp=$("#heroPhoto"); hp.src=IMG(SITE.hero.photo); hp.alt=SITE.brand;
+    if(HERO_OVERLAY) hero.classList.add("hero-overlay");
+  } else if(!heroVideo){
+    hero.classList.add("no-photo");   // видео-режим держит медиа-колонку видимой (карусель монтируется в #heroMedia)
+  }
+  // бейдж рейтинга в hero
+  if(SITE.rating && SITE.rating.value){
+    setText("#heroBadgeVal", SITE.rating.value);
+    setText("#heroBadgeMeta", (SITE.rating.count?SITE.rating.count+" ":"")+(SITE.rating.source||""));
+  } else {
+    var hb=$("#heroBadge"); if(hb) hb.setAttribute("hidden","");
+  }
+
+  /* --- about photo (SITE.about.photo; фолбэк на hero.photo; нет ни того, ни другого → колонка скрыта) --- */
+  var ap=$("#aboutPhoto");
+  var aboutPhoto=(SITE.about&&SITE.about.photo)||SITE.hero.photo;
+  if(aboutPhoto){ ap.src=IMG(aboutPhoto); ap.alt=SITE.brand; }
+  else{ var ag=document.querySelector(".about-grid"); if(ag) ag.classList.add("no-photo"); }
+
+  /* --- контакты --- */
+  setHTML("#cAddress", (SITE.address||[]).map(esc).join("<br>"));
+  if(SITE.addressNote){ setText("#cAddressNote", SITE.addressNote); }
+  else{ $("#cAddressNote").setAttribute("hidden",""); }
+  setHTML("#cHours", (SITE.hours||[]).map(esc).join("<br>"));
+  if(SITE.email){ var ce=$("#cEmail"); ce.setAttribute("href","mailto:"+SITE.email); ce.textContent=SITE.email; }
+  else{ $("#cEmailRow").setAttribute("hidden",""); }
+
+  /* --- кнопки-мессенджеры в контактах --- */
+  var actions=$("#cActions"), hasAction=false;
+  if(SITE.wa){ actions.appendChild(el('<a class="btn btn-ghost btn-sm" href="https://wa.me/'+esc(SITE.wa)+'" target="_blank" rel="noopener">'+btnHTML("whatsapp","WhatsApp")+'</a>')); hasAction=true; }
+  if(tgValid(SITE.tg)){ actions.appendChild(el('<a class="btn btn-ghost btn-sm" href="https://t.me/'+esc(SITE.tg)+'" target="_blank" rel="noopener">'+btnHTML("telegram","Telegram")+'</a>')); hasAction=true; }
+  else if(SITE.tg){ console.warn('SITE.tg = "'+SITE.tg+'" — невалидный username (с + или из одних цифр t.me не открывает чат). Telegram скрыт; укажите username без @ и без +.'); }
+  if(SITE.vk){ actions.appendChild(el('<a class="btn btn-ghost btn-sm" href="https://vk.com/'+esc(SITE.vk)+'" target="_blank" rel="noopener">'+btnHTML("vk","VK")+'</a>')); hasAction=true; }
+  if(SITE.youtube){ actions.appendChild(el('<a class="btn btn-ghost btn-sm" href="'+esc(SITE.youtube)+'" target="_blank" rel="noopener">'+btnHTML("youtube","YouTube")+'</a>')); hasAction=true; }
+  if(SITE.max){ actions.appendChild(el('<a class="btn btn-ghost btn-sm" href="'+esc(SITE.max)+'" target="_blank" rel="noopener">'+btnHTML("max","Max")+'</a>')); hasAction=true; }
+  if(!hasAction) actions.setAttribute("hidden","");
+
+  /* --- floats (data-driven из FLOATS) --- */
+  (function(){
+    var host=$("#floats"); if(!host) return;
+    var CH={
+      wa: { on:!!SITE.wa,            href:"https://wa.me/"+SITE.wa,           cls:"wa",  label:"WhatsApp", icon:"waFloat" },
+      tg: { on:tgValid(SITE.tg),     href:"https://t.me/"+SITE.tg,            cls:"tg",  label:"Telegram", icon:"tgFloat" },
+      vk: { on:!!SITE.vk,            href:"https://vk.com/"+SITE.vk,          cls:"vk",  label:"VK",       icon:"vkFloat" },
+      max:{ on:!!SITE.max,           href:SITE.max,                           cls:"max", label:"Max",      icon:"maxFloat" }
+    };
+    (FLOATS||[]).forEach(function(k){
+      var c=CH[k]; if(!c||!c.on) return;
+      host.appendChild(el('<a class="fab '+c.cls+'" href="'+esc(c.href)+'" target="_blank" rel="noopener" aria-label="'+esc(c.label)+'">'+(FLOAT_ICONS[c.icon]||"")+'</a>'));
+    });
+  })();
+
+  /* --- карта по координатам (ll + pt, НИКОГДА text=) --- */
+  var lat=SITE.mapCoords[0], lng=SITE.mapCoords[1];
+  $("#mapFrame").src = "https://yandex.ru/map-widget/v1/?ll="+lng+"%2C"+lat+"&z=17&pt="+lng+"%2C"+lat+"%2Cpm2rdm";
+
+  /* --- футер --- */
+  setText("#footCopy", "© "+new Date().getFullYear()+" "+SITE.brand+" · "+SITE.niche+", "+SITE.city);
+
+  /* --- политика обработки ПДн: ссылка в чекбоксе формы + футере (+ cookie-баннере) --- */
+  var policyUrl = (SITE.legal && SITE.legal.policyUrl) || "";
+  if(policyUrl){
+    ["#consentLink","#footPolicy","#cookieLink"].forEach(function(sel){ var n=$(sel); if(n) n.setAttribute("href", policyUrl); });
+  } else {
+    console.warn("SITE.legal.policyUrl не задан — ссылки на политику обработки ПДн отсутствуют. При сборе персональных данных это нарушение 152-ФЗ: укажите файл политики (напр. policy.html).");
+    var fp=$("#footPolicy"); if(fp) fp.setAttribute("hidden","");
+  }
+
+  /* --- кнопки-ссылки на профили отзывов (2ГИС + Яндекс) --- */
+  function ratingBtn(r, name, variant){
+    if(!r || !r.value) return "";                              // пустой value → кнопка не рендерится
+    var label = esc(r.value)+" на "+esc(name)+(r.count?" ("+esc(r.count)+" "+esc(r.countNoun||"оценок")+")":"");
+    var attrs = r.url ? ' href="'+esc(r.url)+'" target="_blank" rel="noopener"' : ' href="#"';
+    return '<a class="btn btn-ghost btn-sm rev-src '+variant+'"'+attrs+'><span>'+label+'</span>'+ICONS.external+'</a>';
+  }
+  setHTML("#revSources", ratingBtn(SITE.rating, SITE.rating.source||"2ГИС", "rev-src-gis")
+                       + ratingBtn(SITE.ratingYa, "Яндексе", "rev-src-ya"));
+
+  /* --- META / OG / Twitter --- */
+  var ogTitle = SITE.brand + (SITE.niche?" · "+SITE.niche:"");
+  var desc = SITE.brand+" — "+SITE.niche+", "+SITE.city+". Запись по телефону "+SITE.phone+".";
+  document.title = ogTitle;
+  setMeta('meta[name="description"]', desc);
+  setMeta('meta[property="og:title"]', ogTitle);
+  setMeta('meta[property="og:description"]', desc);
+  setMeta('meta[property="og:site_name"]', SITE.brand);
+  setMeta('meta[property="og:url"]', SITE.og.url);
+  setMeta('meta[property="og:image"]', SITE.og.image);
+  setMeta('meta[property="og:image:alt"]', ogTitle);
+  setMeta('meta[name="twitter:title"]', ogTitle);
+  setMeta('meta[name="twitter:description"]', desc);
+  setMeta('meta[name="twitter:image"]', SITE.og.image);
+
+  /* --- JSON-LD (Schema.org) --- */
+  buildLD(digits, desc);
+
+  /* --- флаги --- */
+  if(STICKY_CTA) document.body.classList.add("sticky-on");
+}
+applySite();
+
+/* ---------- applyCopy(): COPY/ABOUT_POINTS → DOM (копирайт секций; статический текст = fallback) ---------- */
+function applyCopy(){
+  function put(idBase, c){
+    if(!c) return;
+    if(c.eyebrow!=null) setText("#"+idBase+"Eyebrow", c.eyebrow);
+    if(c.title!=null)   setHTML("#"+idBase+"Title",   c.title);
+    if(c.lead!=null)    setHTML("#"+idBase+"Lead",    c.lead);
+  }
+  put("works",COPY.works); put("services",COPY.services); put("about",COPY.about);
+  put("masters",COPY.team); put("reviews",COPY.reviews); put("faq",COPY.faq);
+  put("booking",COPY.booking); put("contacts",COPY.contacts); put("office",COPY.office);
+
+  var ap=$("#aboutPoints");
+  if(ap){
+    if(!ABOUT_POINTS.length){ ap.setAttribute("hidden",""); }
+    else ABOUT_POINTS.forEach(function(p){
+      ap.appendChild(el('<li class="reveal"><span class="ic">'+(ICONS[p.icon]||ICONS.check)+'</span>'+
+        '<div><h3>'+esc(p.title)+'</h3><p>'+esc(p.text)+'</p></div></li>'));
+    });
+  }
+}
+applyCopy();   // СРАЗУ после applySite(); до финального typographer(document.body)
+
+/* dev-проверка (только console, на облик не влияет): забытые плейсхолдеры в заголовках/копирайте */
+(function(){
+  var RX=/плейсхолдер|Заголовок блока/i;
+  document.querySelectorAll(".eyebrow, h1, h2.title, .lead, .about-points h3, .about-points p").forEach(function(n){
+    if(RX.test(n.textContent)) console.warn("[skeleton] Плейсхолдер не заменён:", n.textContent.trim().slice(0,80));
+  });
+})();
+
+/* ============================================================================
+   HERO VIDEO — изолированный компонент. Расширяет ТОЛЬКО hero-медиа-слот:
+   при HERO_MEDIA="video" заменяет #heroPhoto/#heroBadge на горизонтальную scroll-snap
+   карусель клипов. Форму, лайтбокс, select, floats, applySite/applyCopy НЕ трогает.
+   Без библиотек — CSS scroll-snap + ванильный JS.
+   ============================================================================ */
+(function(){
+  if(HERO_MEDIA !== "video" || !HERO_VIDEOS.length) return;
+  var media = $("#heroMedia"); if(!media) return;
+
+  // энергосбережение: Save-Data ИЛИ prefers-reduced-motion → без автоплея (постер + тап)
+  var saveData = !!(navigator.connection && navigator.connection.saveData);
+  var saver = saveData || reduce;
+
+  // статичный бейдж 2ГИС из SITE.rating (одинаковый поверх каждого клипа)
+  var r = SITE.rating || {};
+  var badgeHTML = r.value ? '<span class="hv-badge"><span class="st">★</span><b>'+esc(r.value)+'</b>'+
+                            (r.count? ' · '+esc(r.count):'') + ' · ' + esc(r.source||"2ГИС") + '</span>' : '';
+  var playHTML = '<button class="hv-play" type="button" aria-label="Смотреть видео"><span>'+
+                 '<svg viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></svg></span></button>';
+
+  // строим карусель
+  media.innerHTML = '';
+  var hv    = el('<div class="hv" data-hero-video></div>');
+  var track = el('<div class="hv-track" id="hvTrack" tabindex="0" aria-label="Видео работ мастерской"></div>');
+  var slides = [];
+  HERO_VIDEOS.forEach(function(v, i){
+    var slide = el('<div class="hv-slide'+(saver?' saver':'')+'"></div>');
+    // постер: первый — eager (LCP), остальные lazy
+    slide.appendChild(el('<img class="hv-poster" src="'+esc(v.poster)+'" alt="'+esc(SITE.brand)+' — работа '+(i+1)+'" '+
+      (i===0?'loading="eager" fetchpriority="high"':'loading="lazy"')+'>'));
+    var vid = document.createElement("video");
+    vid.muted = true; vid.loop = true; vid.playsInline = true;
+    vid.setAttribute("muted",""); vid.setAttribute("playsinline",""); vid.setAttribute("webkit-playsinline","");
+    vid.setAttribute("preload","none"); vid.setAttribute("poster", v.poster);
+    vid.src = v.src;
+    slide.appendChild(vid);
+    if(badgeHTML) slide.appendChild(el(badgeHTML));
+    slide.appendChild(el(playHTML));
+    track.appendChild(slide);
+    slides.push({el:slide, video:vid, loaded:false});
+  });
+  // сцена: трек + стрелки перелистывания (стрелки видны только на десктопе, см. CSS)
+  var stage = el('<div class="hv-stage"></div>');
+  stage.appendChild(track);
+  var prevBtn = el('<button class="hv-arrow prev" type="button" aria-label="Предыдущее видео"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>');
+  var nextBtn = el('<button class="hv-arrow next" type="button" aria-label="Следующее видео"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>');
+  prevBtn.addEventListener("click", function(){ goSlide(active-1); });
+  nextBtn.addEventListener("click", function(){ goSlide(active+1); });
+  stage.appendChild(prevBtn); stage.appendChild(nextBtn);
+  hv.appendChild(stage);
+
+  // точки-индикаторы
+  var dots = el('<div class="hv-dots" role="tablist" aria-label="Переключение видео"></div>');
+  HERO_VIDEOS.forEach(function(_, i){
+    var d = el('<button class="hv-dot'+(i===0?' active':'')+'" type="button" role="tab" aria-label="Видео '+(i+1)+'"></button>');
+    d.addEventListener("click", function(){
+      // перескок в т.ч. с последнего на первый — простой scrollIntoView активного слайда
+      slides[i].el.scrollIntoView({behavior: reduce ? "auto" : "smooth", inline:"center", block:"nearest"});
+    });
+    dots.appendChild(d);
+  });
+  hv.appendChild(dots);
+  media.appendChild(hv);
+
+  function playSlide(s){
+    if(saver) return;                       // в энергосбережении не автоплеим
+    if(!s.video.src) s.video.src = s.video.getAttribute("data-src")||s.video.src;
+    var pr = s.video.play();
+    if(pr && pr.catch) pr.catch(function(){ /* автоплей заблокирован — остаётся постер */ });
+    s.el.classList.add("playing");
+  }
+  function pauseSlide(s){ try{ s.video.pause(); }catch(e){} s.el.classList.remove("playing"); }
+
+  // автоплей только видимого слайда (карусель клипует невидимые → они не пересекают вьюпорт)
+  var active = 0;
+  if(!saver && "IntersectionObserver" in window){
+    var io2 = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var idx = slides.indexOf(slides.filter(function(s){return s.el===en.target;})[0]);
+        if(idx<0) return;
+        if(en.isIntersecting && en.intersectionRatio>=0.6){ active=idx; setDot(idx); playSlide(slides[idx]); }
+        else { pauseSlide(slides[idx]); }
+      });
+    }, {threshold:[0,0.6,1]});
+    slides.forEach(function(s){ io2.observe(s.el); });
+  }
+
+  // синхронизация точек при ручном свайпе
+  var scrollRaf;
+  track.addEventListener("scroll", function(){
+    if(scrollRaf) cancelAnimationFrame(scrollRaf);
+    scrollRaf = requestAnimationFrame(function(){
+      var idx = Math.round(track.scrollLeft / track.clientWidth);
+      idx = Math.max(0, Math.min(slides.length-1, idx));
+      if(idx!==active){ active=idx; setDot(idx); }
+    });
+  }, {passive:true});
+  function setDot(idx){
+    Array.prototype.forEach.call(dots.children, function(d,i){ d.classList.toggle("active", i===idx); });
+  }
+  // перелистывание стрелками (с закольцовкой: с последнего → на первый и наоборот)
+  function goSlide(idx){
+    idx = (idx + slides.length) % slides.length;
+    slides[idx].el.scrollIntoView({behavior: reduce ? "auto" : "smooth", inline:"center", block:"nearest"});
+  }
+
+  // тап по слайду: в saver — запустить именно этот клип; иначе пауза/плей
+  slides.forEach(function(s){
+    function toggle(){
+      if(s.el.classList.contains("saver")){ s.el.classList.remove("saver"); playForce(s); return; }
+      if(s.video.paused) playSlide(s); else pauseSlide(s);
+    }
+    s.el.addEventListener("click", function(e){ if(e.target.closest(".hv-dot")) return; toggle(); });
+  });
+  function playForce(s){                    // ручной запуск (даже в reduced-motion — по явному тапу)
+    var pr = s.video.play(); if(pr&&pr.catch) pr.catch(function(){});
+    s.el.classList.add("playing");
+  }
+
+  // страховка автоплея: пнуть первый слайд после загрузки шрифтов/меты
+  if(!saver){ window.addEventListener("load", function(){ playSlide(slides[active]); }); }
+})();
+
+/* ---------- TRUST STRIP ---------- */
+(function(){
+  if(!TRUST.length) return;
+  var sec=$("#trust"), grid=$("#trustGrid");
+  sec.removeAttribute("hidden");
+  sec.style.setProperty("--trust-n", TRUST.length);
+  TRUST.forEach(function(t){
+    grid.appendChild(el('<div class="trust-item reveal"><span class="trust-ic">'+(ICONS[t.icon]||ICONS.star)+'</span>'+
+      '<div class="trust-big">'+esc(t.big)+'</div>'+
+      (t.small?'<div class="trust-small">'+esc(t.small)+'</div>':'')+'</div>'));
+  });
+})();
+
+/* ---------- SERVICES ---------- */
+(function(){
+  // режим: явный флаг grouped ИЛИ непустой SERVICE_GROUPS → grouped, иначе flat
+  var mode = (SERVICES_MODE === "grouped" || SERVICE_GROUPS.length) ? "grouped" : "flat";
+  var empty = (mode === "grouped") ? !SERVICE_GROUPS.length : !SERVICES.length;
+  if(empty){ var s=$("#services"); if(s) s.setAttribute("hidden",""); }
+  var sg = $("#svcGrid");
+  var durSVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+  var selSvc = $("#f-service");
+  if(!SERVICE_IN_FORM){ var sfHide=$("#serviceField"); if(sfHide) sfHide.setAttribute("hidden",""); }
+  if(SERVICE_IN_FORM) selSvc.appendChild(el('<option value="">Выберите услугу</option>'));
+
+  if(mode === "grouped"){
+    sg.classList.add("grouped");
+    SERVICE_GROUPS.forEach(function(g){
+      var rows = (g.items||[]).map(function(it){
+        var note = it.note ? '<span class="svc-row-note">'+esc(it.note)+'</span>' : '';
+        return '<div class="svc-row"><span class="svc-row-name">'+esc(it.name)+note+'</span>'+
+               '<span class="svc-row-price">'+priceHTML(it.price)+'</span></div>';
+      }).join("");
+      var ico  = ICONS[g.icon] || ICONS.star;
+      var desc = g.desc ? '<p class="svc-group-desc">'+esc(g.desc)+'</p>' : '';
+      sg.appendChild(el('<article class="svc-group reveal">'+
+        '<div class="svc-group-head"><span class="svc-group-ic">'+ico+'</span>'+
+          '<h3 class="svc-group-title">'+esc(g.title)+'</h3></div>'+
+        '<div class="svc-rows">'+rows+'</div>'+ desc +
+        '<button class="btn btn-ghost btn-sm btn-block" data-scrollform>'+btnHTML(ICON_CTA, SITE.ctaLabel)+'</button>'+
+      '</article>'));
+      // нативная группировка опций select по категориям
+      var og = el('<optgroup label="'+esc(g.title)+'"></optgroup>');
+      (g.items||[]).forEach(function(it){ og.appendChild(el('<option value="'+esc(it.name)+'">'+esc(it.name)+'</option>')); });
+      if(SERVICE_IN_FORM) selSvc.appendChild(og);
+    });
+    return;
+  }
+
+  // flat: карточка-на-услугу; img/desc/dur опциональны
+  SERVICES.forEach(function(s){
+    var ph   = s.img  ? '<div class="svc-ph"><img loading="lazy" src="'+IMG(s.img)+'" alt="'+esc(s.name)+'"></div>' : '';
+    var dur  = s.dur  ? '<span class="svc-dur">'+durSVG+esc(s.dur)+'</span>' : '';
+    var desc = s.desc ? '<p class="svc-desc">'+esc(s.desc)+'</p>' : '';
+    var card = el('<article class="svc reveal'+(s.img?'':' no-photo')+'">'+ ph +
+      '<div class="svc-body">'+
+        '<div class="svc-name">'+esc(s.name)+'</div>'+ desc +
+        '<div class="svc-meta"><span class="svc-price">'+priceHTML(s.price)+'</span>'+dur+'</div>'+
+        '<button class="btn btn-ghost btn-sm btn-block" data-svc="'+s.id+'">'+btnHTML(ICON_CTA, SITE.ctaLabel)+'</button>'+
+      '</div></article>');
+    sg.appendChild(card);
+  });
+  if(SERVICE_IN_FORM) SERVICES.forEach(function(s){ selSvc.appendChild(el('<option value="'+s.id+'">'+esc(s.name)+' · '+esc(s.price)+'</option>')); });
+})();
+
+/* ---------- MASTERS ---------- */
+(function(){
+  if(!MASTER_IN_FORM){ var mfHide=$("#masterField"); if(mfHide) mfHide.setAttribute("hidden",""); }
+  if(!MASTERS.length){
+    var teamSec=$("#team"); if(teamSec) teamSec.setAttribute("hidden","");   // вся секция «Команда»
+    var mf0=$("#masterField"); if(mf0) mf0.setAttribute("hidden","");        // выпадашка «Мастер» тоже скрыта
+    return;
+  }
+  var mg = $("#masters");
+  MASTERS.forEach(function(m){
+    var cta = MASTER_CARD_CTA
+      ? '<button class="btn btn-ghost btn-sm btn-block" data-master="'+m.id+'">'+btnHTML(ICON_CTA, SITE.ctaLabel)+'</button>'
+      : '';
+    var card = el('<article class="master reveal">'+
+      '<div class="master-ph"><img loading="lazy" src="'+IMG(m.img)+'" alt="'+esc(m.name)+'"></div>'+
+      '<div class="master-body"><h3>'+esc(m.name)+'</h3><p>'+esc(m.bio)+'</p>'+cta+
+      '</div></article>');
+    mg.appendChild(card);
+  });
+  if(MASTER_IN_FORM){
+    var selM = $("#f-master");
+    if(selM){
+      selM.appendChild(el('<option value="">Любой мастер</option>'));
+      MASTERS.forEach(function(m){ selM.appendChild(el('<option value="'+m.id+'">'+esc(m.name)+'</option>')); });
+    }
+  }
+})();
+
+/* ---------- TIME SELECT ---------- */
+(function(){
+  if(!TIME_IN_FORM){ var tfHide=$("#timeField"); if(tfHide) tfHide.setAttribute("hidden",""); return; }
+  var selT = $("#f-time");
+  selT.appendChild(el('<option value="">Выберите время</option>'));
+  TIMES.forEach(function(t){ selT.appendChild(el('<option value="'+t+'">'+t+'</option>')); });
+})();
+
+/* ---------- REVIEWS ---------- */
+(function(){
+  if(!REVIEWS.length){ $("#reviews").setAttribute("hidden",""); return; }
+  var rg = $("#revGrid");
+  REVIEWS.forEach(function(r){
+    rg.appendChild(el('<article class="rev reveal"><div class="stars">★★★★★</div>'+
+      '<p>'+esc(r.text)+'</p>'+
+      '<div class="who"><span class="ava">'+esc(r.name.charAt(0))+'</span><div><div class="nm">'+esc(r.name)+'</div><div class="dt">'+esc(r.date)+'</div></div></div></article>'));
+  });
+})();
+
+/* ---------- FAQ ---------- */
+(function(){
+  if(!FAQ.length){ $("#faq").setAttribute("hidden",""); return; }
+  var fg = $("#faqList");
+  FAQ.forEach(function(f){
+    fg.appendChild(el('<details class="qa reveal"><summary><span class="pl"></span><span>'+esc(f.q)+'</span></summary><div class="ans">'+esc(f.a)+'</div></details>'));
+  });
+})();
+
+/* ---------- GALLERY + TABS ---------- */
+var galleryCache = {works:[], office:[]};
+(function(){
+  if(!WORK_FILES.length){ $("#works").setAttribute("hidden",""); return; }
+  function catOf(n){ for(var k in CAT){ if(CAT[k].indexOf(n)>-1) return k; } return null; }
+  var WORKS = WORK_FILES.map(function(f){
+    if(typeof f==="object"&&f){ return {file:IMG(f.file), cat:f.cat||null, feature:!!f.feature}; }
+    var mm=String(f).match(/(\d+)/); var n=mm?parseInt(mm[1],10):0;   // LEGACY: строка + CAT по номеру
+    return {file:IMG(f), cat:catOf(n), feature:false};
+  });
+
+  var galEl = $("#gal"), tabsEl = $("#tabs"), galMore = $("#galMore");
+  galMore.innerHTML = ICONS[ICON_MORE] + '<span class="gm-label">Посмотреть все</span>';
+  var galLabel = galMore.querySelector(".gm-label");
+  var GAL_LIMIT = 12;
+  var galExpanded = false;
+  function updateGalCollapse(total){
+    var items = galEl.children, i;
+    for(i=0;i<items.length;i++){ items[i].classList.toggle("gal-hidden", !galExpanded && i>=GAL_LIMIT); }
+    if(total>GAL_LIMIT){
+      galMore.style.display="";
+      galLabel.textContent = galExpanded ? "Свернуть" : "Посмотреть все";
+      galMore.setAttribute("aria-expanded", galExpanded ? "true" : "false");
+    } else { galMore.style.display="none"; }
+  }
+  function paintGallery(cat){
+    galEl.innerHTML="";
+    var list = WORKS.filter(function(w){return cat==="all"||w.cat===cat;});
+    var featIdx=-1; for(var fi=0; fi<list.length; fi++){ if(list[fi].feature){ featIdx=fi; break; } }
+    if(featIdx<0) featIdx=0;   // нет явной feature-плитки в этом табе → первое фото
+    list.forEach(function(w,i){
+      var cls = "gal-item" + (i===featIdx ? " feature" : "");   // доминанта: feature-плитка (по умолчанию первая)
+      galEl.appendChild(el('<button class="'+cls+'" data-gallery="works" data-idx="'+i+'"><img loading="lazy" src="'+w.file+'" alt="Фото работы">'+zoomIco+'</button>'));
+    });
+    galleryCache.works = list.map(function(w){return w.file;});
+    galExpanded = false;
+    updateGalCollapse(list.length);
+  }
+  galMore.addEventListener("click", function(){
+    galExpanded = !galExpanded;
+    updateGalCollapse(galEl.children.length);
+    if(!galExpanded){ document.getElementById("works").scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"start"}); }
+  });
+
+  // табы: один таб → скрываем панель табов, просто сетка
+  if(TABS.length>1){
+    TABS.forEach(function(t,i){ tabsEl.appendChild(el('<button class="tab'+(i===0?' active':'')+'" data-cat="'+t.id+'">'+esc(t.label)+'</button>')); });
+    tabsEl.addEventListener("click", function(e){
+      var b = e.target.closest(".tab"); if(!b) return;
+      Array.prototype.forEach.call(tabsEl.children,function(c){c.classList.remove("active");});
+      b.classList.add("active");
+      paintGallery(b.getAttribute("data-cat"));
+    });
+  } else { tabsEl.setAttribute("hidden",""); }
+  paintGallery(TABS[0] ? TABS[0].id : "all");
+})();
+
+/* ---------- OFFICE GALLERY ---------- */
+(function(){
+  if(!OFFICE.length){ $("#officeBlock").setAttribute("hidden",""); return; }
+  var officeEl = $("#office");
+  galleryCache.office = OFFICE.map(IMG);
+  galleryCache.office.forEach(function(src,i){
+    var cls = "gal-item" + (i===0 ? " feature" : "");   // первое фото — доминанта (как в «Работах»)
+    officeEl.appendChild(el('<button class="'+cls+'" data-gallery="office" data-idx="'+i+'"><img loading="lazy" src="'+src+'" alt="Интерьер">'+zoomIco+'</button>'));
+  });
+})();
+
+/* ---------- PRUNE DEAD NAV LINKS ---------- */
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.nav-link[href^="#"]'), function(a){
+    var sec=document.getElementById(a.getAttribute("href").slice(1));
+    if(!sec || sec.hasAttribute("hidden")) a.setAttribute("hidden","");
+  });
+})();
+
+/* ---------- LIGHTBOX ---------- */
+var lb=$("#lb"), lbImg=$("#lbImg"), lbCur=$("#lbCur"), lbTot=$("#lbTot");
+var lbList=[], lbIdx=0;
+function openLB(name, idx){ lbList = galleryCache[name]||[]; if(!lbList.length) return; lbIdx=idx; showLB(); lb.classList.add("open"); document.body.style.overflow="hidden"; }
+function showLB(){ lbImg.src = lbList[lbIdx]; lbCur.textContent=(lbIdx+1); lbTot.textContent=lbList.length; }
+function moveLB(d){ lbIdx=(lbIdx+d+lbList.length)%lbList.length; lbImg.style.opacity=0; setTimeout(function(){showLB(); lbImg.style.opacity=1;},90); }
+function closeLB(){ lb.classList.remove("open"); document.body.style.overflow=""; }
+document.addEventListener("click", function(e){
+  var g=e.target.closest("[data-gallery]");
+  if(g){ openLB(g.getAttribute("data-gallery"), +g.getAttribute("data-idx")); }
+});
+$("#lbClose").onclick=closeLB;
+$("#lbPrev").onclick=function(){moveLB(-1);};
+$("#lbNext").onclick=function(){moveLB(1);};
+lb.addEventListener("click", function(e){ if(e.target===lb) closeLB(); });
+document.addEventListener("keydown", function(e){
+  if(!lb.classList.contains("open")) return;
+  if(e.key==="Escape") closeLB();
+  else if(e.key==="ArrowLeft") moveLB(-1);
+  else if(e.key==="ArrowRight") moveLB(1);
+});
+var tx=0;
+lb.addEventListener("touchstart", function(e){tx=e.changedTouches[0].clientX;}, {passive:true});
+lb.addEventListener("touchend", function(e){ var dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>45) moveLB(dx<0?1:-1); }, {passive:true});
+
+/* ---------- PREFILL FROM CARDS ---------- */
+var selSvc=$("#f-service"), selM=$("#f-master");
+function scrollToForm(){ document.getElementById("booking").scrollIntoView({behavior:"smooth"}); }
+function flash(node){ if(!node) return; node.style.transition="box-shadow .25s"; node.style.boxShadow="0 0 0 3px var(--accent-soft)"; setTimeout(function(){node.style.boxShadow="";},900); }
+document.addEventListener("click", function(e){
+  var sv=e.target.closest("[data-svc]");
+  if(sv){ if(selSvc){ selSvc.value=sv.getAttribute("data-svc"); flash(selSvc); } scrollToForm(); return; }
+  var ms=e.target.closest("[data-master]");
+  if(ms){ if(selM){ selM.value=ms.getAttribute("data-master"); flash(selM); } scrollToForm(); return; }
+  // grouped-режим: кнопка категории без преселекта — просто скролл к форме
+  if(e.target.closest("[data-scrollform]")){ scrollToForm(); }
+});
+
+/* ---------- PHONE MASK + VALIDATION ---------- */
+var phone=$("#f-phone");
+function formatPhone(v){
+  var d=v.replace(/\D/g,"");
+  if(d.startsWith("8")) d="7"+d.slice(1);
+  if(!d.startsWith("7")) d="7"+d;
+  d=d.slice(0,11);
+  var r="+7";
+  if(d.length>1) r+=" ("+d.slice(1,4);
+  if(d.length>=4) r+=") "+d.slice(4,7);
+  if(d.length>=7) r+="-"+d.slice(7,9);
+  if(d.length>=9) r+="-"+d.slice(9,11);
+  return r;
+}
+phone.addEventListener("focus", function(){ if(!phone.value) phone.value="+7 ("; });
+phone.addEventListener("input", function(){ phone.value=formatPhone(phone.value); });
+phone.addEventListener("blur", function(){ if(phone.value==="+7 (") phone.value=""; });
+function phoneValid(){ return phone.value.replace(/\D/g,"").length===11; }
+function nameValid(){ return $("#f-name").value.trim().length>=2; }
+var consent=$("#f-consent");
+function consentValid(){ return !!(consent && consent.checked); }
+function setErr(field, on){ var wrap=field.closest(".field"); wrap.classList.toggle("invalid", on); field.classList.toggle("err", on); }
+$("#f-name").addEventListener("input", function(){ if(nameValid()) setErr($("#f-name"),false); });
+phone.addEventListener("input", function(){ if(phoneValid()) setErr(phone,false); });
+if(consent) consent.addEventListener("change", function(){ if(consent.checked) $("#consentField").classList.remove("invalid"); });
+
+/* ---------- SUBMIT (без сети; боевой submit — SITE.booking.url) ---------- */
+var form=$("#bookForm"), success=$("#success");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  var ok=true;
+  if(!nameValid()){ setErr($("#f-name"),true); ok=false; }
+  if(!phoneValid()){ setErr(phone,true); ok=false; }
+  if(!consentValid()){ $("#consentField").classList.add("invalid"); ok=false; }   // согласие на ПДн обязательно
+  if(!ok){ var bad=form.querySelector(".invalid input"); if(bad) bad.focus(); return; }
+  if(SITE.booking && SITE.booking.url){ window.open(SITE.booking.url, "_blank", "noopener"); return; }
+  // плейсхолдер-режим: НИКАКИХ запросов — только показ плашки успеха.
+  form.style.display="none";
+  success.classList.add("show");
+  success.scrollIntoView({behavior:"smooth", block:"center"});
+});
+$("#againBtn").addEventListener("click", function(){
+  form.reset();
+  success.classList.remove("show");
+  form.style.display="";
+  form.scrollIntoView({behavior:"smooth", block:"center"});
+});
+
+/* ---------- COOKIE NOTICE (флаг COOKIE_NOTICE; ТОЛЬКО при подключённой аналитике/куки) ---------- */
+(function(){
+  if(!COOKIE_NOTICE) return;
+  var KEY="cookie-consent", ok=false;
+  try{ ok = localStorage.getItem(KEY)==="1"; }catch(e){}   // localStorage может быть недоступен (file://, приватный режим)
+  if(ok) return;
+  var bar=$("#cookieBar"); if(!bar) return;
+  bar.removeAttribute("hidden");
+  $("#cookieOk").addEventListener("click", function(){
+    try{ localStorage.setItem(KEY,"1"); }catch(e){}
+    bar.setAttribute("hidden","");
+  });
+})();
+
+/* ---------- HEADER SCROLL ---------- */
+var topbar=$("#topbar");
+function onScroll(){ topbar.classList.toggle("scrolled", window.scrollY>40); }
+onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+
+/* ---------- BURGER / MOBILE NAV ---------- */
+var burger=$("#burger"), nav=$("#nav"), topbarInner=$(".topbar-inner");
+function setMenu(open){
+  burger.classList.toggle("open", open);
+  nav.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", open?"true":"false");
+  burger.setAttribute("aria-label", open?"Закрыть меню":"Открыть меню");
+  document.body.style.overflow = open ? "hidden" : "";
+}
+burger.addEventListener("click", function(){ setMenu(!nav.classList.contains("open")); });
+nav.addEventListener("click", function(e){ if(e.target.closest("a")){ setMenu(false); updateNav(); } });
+document.addEventListener("keydown", function(e){ if(e.key==="Escape" && nav.classList.contains("open")){ setMenu(false); updateNav(); } });
+
+/* Бургер по факту, а не по фикс-ширине: в горизонтальном раскладе меряем, влезает ли
+   содержимое шапки (.topbar-inner). Не влезает → .compact (бургер). Зависит от длины
+   логотипа/числа пунктов, поэтому подстраивается под каждый макет сам. */
+function updateNav(){
+  if(nav.classList.contains("open")) return;            // во время открытого меню не меряем
+  topbar.classList.add("nav-measuring");                // глушим transition .nav на время замера
+  topbar.classList.remove("compact");                   // вернуть инлайн-раскладку для замера
+  var overflow = topbarInner.scrollWidth > topbarInner.clientWidth + 1;
+  topbar.classList.toggle("compact", overflow);
+  void topbar.offsetWidth;                              // зафиксировать финальный стиль без анимации
+  topbar.classList.remove("nav-measuring");
+}
+updateNav();
+var navRaf;
+window.addEventListener("resize", function(){ if(navRaf) cancelAnimationFrame(navRaf); navRaf=requestAnimationFrame(updateNav); }, {passive:true});
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(updateNav); }   // веб-шрифты меняют метрики
+
+/* ---------- REVEAL ---------- */
+if(reduce){
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(n){n.classList.add("in");});
+}else{
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+  }, {threshold:0, rootMargin:"0px 0px -40px 0px"});
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(n){io.observe(n);});
+}
+
+/* ---------- ТИПОГРАФИКА (неразрывные пробелы; тире не открывает строку) ---------- */
+var NBSP=" ";
+function wordLen(s){ var m=s.match(/[A-Za-zА-Яа-яЁё0-9]/g); return m?m.length:0; }
+function typoText(s){
+  if(s.indexOf(" ")===-1) return s;
+  var parts=s.split(" "), out=parts[0], i, prev, cur, sep;
+  for(i=1;i<parts.length;i++){
+    prev=parts[i-1]; cur=parts[i]; sep=" ";
+    if(prev!==""){
+      var wl=wordLen(prev);
+      if(wl>=1 && wl<=2) sep=NBSP;                          // правило 1: короткое слово
+      else if(cur!=="" && /^[—–-]/.test(cur)) sep=NBSP;     // правило 2: тире/дефис не открывает строку
+      else if(cur!=="" && /^₽/.test(cur)) sep=NBSP;         // валюту держим рядом с суммой
+    }
+    out+=sep+cur;
+  }
+  return out;
+}
+(function typographer(root){
+  var SKIP={SCRIPT:1,STYLE:1,NOSCRIPT:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,CODE:1};
+  (function walk(node){
+    for(var n=node.firstChild;n;n=n.nextSibling){
+      if(n.nodeType===3){
+        if(/\S/.test(n.nodeValue)){ var nt=typoText(n.nodeValue); if(nt!==n.nodeValue) n.nodeValue=nt; }
+      } else if(n.nodeType===1 && !SKIP[n.tagName] && !(window.SVGElement && n instanceof SVGElement)){
+        walk(n);
+      }
+    }
+  })(root);
+})(document.body);
+})();
+</script>
+</body>
+</html>

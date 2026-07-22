@@ -1,0 +1,21 @@
+# Приватное — НЕ публиковать (реальные имена клиентов/мастеров, юр-заметки, скелет, стратегия)
+CLAUDE.md
+STRATEGY.md
+BRIEF-*.md
+reviews.md
+services.md
+masters.md
+links.md
+SKELETON-README.md
+LEGAL-NOTES.md
+Skeleton_errors.md
+skeleton.html
+.claude/
+
+# Исходники медиа (в прод идут только оптимизированные webp/mp4)
+Video/
+Logo.jpg
+images/*.png
+images/*.jpg
+!images/og.jpg
+!images/favicon.png
